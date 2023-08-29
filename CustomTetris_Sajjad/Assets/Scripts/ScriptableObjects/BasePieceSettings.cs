@@ -6,5 +6,6 @@ public abstract class BasePieceSettings : ScriptableObject
 {
     public PieceData pieceData;
 
-    public abstract float CalculateSpeed();
+    public abstract float CalculateNormalFallSpeed();
+    public abstract float CaclulateFreeFallSpeed();
 }

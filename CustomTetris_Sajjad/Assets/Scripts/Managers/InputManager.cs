@@ -47,17 +47,6 @@ public class InputManager : MonoBehaviour
         {
             SreenTouchEnd();
         }
-
-        //if(rotateObject)
-        //{
-        //    float rotateVal = Mathf.MoveTowardsAngle(rotationPivot.rotation.eulerAngles.z, targetRotation, 300 * Time.unscaledDeltaTime);
-        //    rotationPivot.rotation = Quaternion.Euler(0f, 0f, rotateVal);
-
-        //    if (Mathf.Approximately(rotateVal, targetRotation))
-        //    {
-        //        rotateObject = false;
-        //    }
-        //}
     }
 
     private void ManagePieceMovement()
@@ -67,21 +56,20 @@ public class InputManager : MonoBehaviour
         Vector3 swipeDirection = endPressPosition - startPressPosition;
 
         //// Check if the swipe distance is larger than the threshold
-        if (swipeDirection.magnitude > 0.5f)
+        if (swipeDirection.x > 0.8f || swipeDirection.x < -0.8f)
         {
             // Calculate the movement amount based on swipe distance
             float moveAmount = swipeDirection.x * Time.deltaTime;
 
-            //Debug.Log("Movement Amount: " + moveAmount);
-
             // Move the parent GameObject (this will move the child object)
             //testingPiece.Translate(new Vector3(moveAmount, 0f, 0f));
-
+            MoveObject(moveAmount);
             // Update the mouse start position for the next frame
             startPressPosition = endPressPosition;
         }
     }
 
+    private void MoveObject(float moveAmount) => Managers.PiecesObjectPooler.ActivePiece.MovePieceSideWays(moveAmount);
 
     private void ScreenTouchBegan()
     {
@@ -91,31 +79,28 @@ public class InputManager : MonoBehaviour
 
     private void SreenTouchEnd()
     {
-        if (Time.time - touchPhaseStart < tapInterval)
+        endPressPosition = Input.mousePosition;
+
+        Vector3 swipeDirection = endPressPosition - startPressPosition;
+
+        if ((Time.time - touchPhaseStart < tapInterval) && swipeDirection.magnitude < 0.2)
         {
-            //targetRotation = rotationPivot.rotation.eulerAngles.z + 90.0f;
-
-            //if (targetRotation >= 360.0f)
-            //{
-            //    targetRotation -= 360.0f;
-            //}
-
-            //rotateObject = true;
+            if (Managers.PiecesObjectPooler.ActivePiece != null)
+                Managers.PiecesObjectPooler.ActivePiece.RotatePiece();
         }
+
+        //swipe down
+        else if (swipeDirection.y < 0 && swipeDirection.x > -0.5f && swipeDirection.x < 0.5f)
+        {
+            Managers.PiecesObjectPooler.ActivePiece.FreeFallPiece();
+            //Managers.PiecesObjectPooler.UpdateActivePieceReference(null);
+
+            //if (Managers.Game.currentShape != null)
+            //{
+            //    isActive = false;
+            //    Managers.Game.currentShape.movementController.InstantFall();
+            //}
+        }
+
     }
-
-    //public void MoveHorizontal(Vector2 direction)
-    //{
-    //    //endPressPosition = Input.mousePosition;
-    //    Vector3 swipeDirection = endPressPosition - startPressPosition;
-
-    //    // Calculate the movement amount based on swipe distance
-    //    float moveAmount = swipeDirection.x * Time.unscaledDeltaTime * 10f;
-
-    //    // Move the parent GameObject (this will move the child object)
-    //    transform.Translate(new Vector3(moveAmount, 0f, 0f));
-
-    //    // Update the mouse start position for the next frame
-    //    startPressPosition = endPressPosition;
-    //}
 }

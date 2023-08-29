@@ -27,6 +27,7 @@ public class PlayerPieceReturnToPool : BaseReturnToPool
     {
         base.OnOutOfBounds();
         Managers.PiecesObjectPooler.Pool.Release(pieceMovementHandler);
+        //Managers.PiecesObjectPooler.UpdateActivePieceReference(null);
         pieceMovementHandler.Reset();
         //movementHandlerPool.Release(pieceMovementHandler);
     }

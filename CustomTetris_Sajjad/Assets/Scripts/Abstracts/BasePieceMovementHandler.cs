@@ -36,18 +36,23 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
         IsPlaced = false;
         IsMoveable = true;
         rotatePiece = false;
-        _pieceState = PieceState.Disabled;
+        UpdatePieceState(PieceState.Falling);
     }
 
     public virtual void MyEnable()
     {
         targetRotation = pieceSettings.pieceData.targetRotation;
         rotationSpeed = pieceSettings.pieceData.rotationSpeed;
-        fallSpeed = pieceSettings.CalculateSpeed();
+        fallSpeed = pieceSettings.CalculateNormalFallSpeed();
     }
 
     public virtual void RotatePiece()
     {
+        Debug.Log("Rotate Piece" + IsPlaced);
+
+        if (IsPlaced || !IsMoveable)
+            return;
+
         targetRotation = rotationPivot.rotation.eulerAngles.z + 90.0f;
 
         if (targetRotation >= 360.0f)
@@ -79,8 +84,9 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
 
     public virtual void FreeFallPiece()
     {
-        fallSpeed = pieceSettings.pieceData.freefallSpeed;
+        fallSpeed = pieceSettings.CaclulateFreeFallSpeed();
         IsMoveable = false;
+        UpdatePieceState(PieceState.FreeFall);
     }
 
     public virtual void Reset()
@@ -113,11 +119,31 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("surface") || collision.gameObject.CompareTag("Block"))
+        IPieceMovementHandler ipieceMovmentHandler = collision.gameObject.GetComponent<IPieceMovementHandler>();
+
+        if (collision.gameObject.CompareTag("surface") || (ipieceMovmentHandler != null && ipieceMovmentHandler.IsPlaced))
         {
             IsPlaced = true;
+            IsMoveable = false;
             _myRigidBody.useGravity = true;
+            UpdatePieceState(PieceState.IsPlaced);
+            //Managers.PieceSpawner.SpawnPiece();
         }
+
+        //if (collision.gameObject.CompareTag("surface") || collision.gameObject.CompareTag("Block"))
+        //{
+        //    IsPlaced = true;
+        //    IsMoveable = false;
+        //    _myRigidBody.useGravity = true;
+        //    UpdatePieceState(PieceState.IsPlaced);
+        //    Debug.Log("")
+        //    //Managers.PiecesObjectPooler.UpdateActivePieceReference(null);
+        //}
+    }
+
+    private void UpdatePieceState(PieceState pieceState)
+    {
+        _pieceState = pieceState;
     }
     #endregion
 }

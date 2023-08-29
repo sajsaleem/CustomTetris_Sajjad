@@ -1,6 +1,7 @@
 public enum PieceState
 {
     Falling = 0,
-    IsPlaced = 1,
-    Disabled = 2
+    FreeFall = 1,
+    IsPlaced = 2,
+    Disabled = 3
 }

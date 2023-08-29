@@ -964,7 +964,7 @@ GameObject:
   - component: {fileID: 1463777490}
   - component: {fileID: 1463777491}
   - component: {fileID: 1463777493}
-  - component: {fileID: 1463777492}
+  - component: {fileID: 1463777494}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -1006,7 +1006,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1463777488}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32c74e97c4505e84492293f8eadb7f2d, type: 3}
   m_Name: 
@@ -1014,7 +1014,7 @@ MonoBehaviour:
   tapInterval: 0.2
   testingPiece: {fileID: 0}
   rotationPivot: {fileID: 0}
---- !u!114 &1463777492
+--- !u!114 &1463777493
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1026,7 +1026,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72048c7fe121c6341bde2b7fe9f9bb83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1463777493
+  pieceSpawner: {fileID: 1535782172}
+--- !u!114 &1463777494
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1035,17 +1036,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1463777488}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bd0a9b5c4540084e865ad294669402b, type: 3}
+  m_Script: {fileID: 11500000, guid: df38b6dbf57e3f24793bfd1d5e71061f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   piecesPrefabs:
   - {fileID: 1487152593374473681, guid: 6cff8346e6f8cfe49adeb838d5f27191, type: 3}
   - {fileID: 8358936445457641087, guid: 466eb4b76f3f42240a010e7fe2c9d680, type: 3}
   - {fileID: 6077088999393712897, guid: 413762a1d4df63341aaefe5d828695cf, type: 3}
+  - {fileID: 6027148508261096800, guid: f2d0cff2bd7256d42b6958300bb934ed, type: 3}
+  - {fileID: 3925793521135487630, guid: 3a794f85393b5aa4c9d8a77d6ce9576b, type: 3}
   - {fileID: 413558724946624797, guid: 841cd09905cc5a44c91ad5e2dd2cf8c3, type: 3}
   - {fileID: 8170306855128907155, guid: 070c81934988f7442b2d34322d929fd6, type: 3}
-  - {fileID: 3925793521135487630, guid: 3a794f85393b5aa4c9d8a77d6ce9576b, type: 3}
-  - {fileID: 6027148508261096800, guid: f2d0cff2bd7256d42b6958300bb934ed, type: 3}
+  defaultCapacity: 100
+  maxCapacity: 200
 --- !u!1 &1535782169
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,19 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PiecesObjectPooler))]
+//[RequireComponent(typeof(IPiecesObjectPooler))]
 
 public class Managers : MonoBehaviour
 {
-    private static PiecesObjectPooler piecesObjectPooler;
+    private static IPiecesObjectPooler piecesObjectPooler;
 
-    public static PiecesObjectPooler PiecesObjectPooler
+    public static PieceSpawner pieceSpawner;
+
+    public static PieceSpawner PieceSpawner => pieceSpawner;
+
+
+    public static IPiecesObjectPooler PiecesObjectPooler
     {
-        get => piecesObjectPooler;
+        get
+        {
+            if (piecesObjectPooler == null)
+                return NullPiecesObjectPooler.Instance;
+
+            return piecesObjectPooler;
+        }
+            //=> piecesObjectPooler;
     }
+
 
     private void Awake()
     {
-        piecesObjectPooler = GetComponent<PiecesObjectPooler>();
+        piecesObjectPooler = GetComponent<IPiecesObjectPooler>();
+        pieceSpawner = FindObjectOfType<PieceSpawner>();
     }
 }

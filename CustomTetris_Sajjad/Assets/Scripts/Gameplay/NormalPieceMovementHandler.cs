@@ -10,6 +10,11 @@ public class NormalPieceMovementHandler : BasePieceMovementHandler
         MyEnable();
     }
 
+    private void Update()
+    {
+        MyUpdate();
+    }
+
     public override void MyEnable()
     {
         base.MyEnable();
@@ -28,6 +33,11 @@ public class NormalPieceMovementHandler : BasePieceMovementHandler
     public override void RotatePiece()
     {
         base.RotatePiece();
+    }
+
+    public override void FreeFallPiece()
+    {
+        base.FreeFallPiece();
     }
 
     public override void MyUpdate()

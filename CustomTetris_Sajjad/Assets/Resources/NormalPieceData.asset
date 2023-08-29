@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: NormalPieceData
   m_EditorClassIdentifier: 
   pieceData:
-    normalFallSpeed: 1
-    freefallSpeed: 1
+    normalFallSpeed: 0.5
+    freefallSpeed: 2
     rotationSpeed: 300
     targetRotation: 90
     gravity: -9.81

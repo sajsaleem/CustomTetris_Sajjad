@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConstantsManager : MonoBehaviour
+public class ConstantsManager
 {
     public static class MenuName
     {

@@ -5,3 +5,9 @@ public enum PieceState
     IsPlaced = 2,
     Disabled = 3
 }
+
+public enum LevelType
+{
+    SinglePlayer = 0,
+    TwoPlayer = 1
+}

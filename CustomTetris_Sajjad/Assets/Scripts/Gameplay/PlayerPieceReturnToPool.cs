@@ -13,7 +13,7 @@ public class PlayerPieceReturnToPool : BaseReturnToPool
 
     private void Start()
     {
-        screenBounds = ScreenBoundsStaticClass.GetScreenBounds();
+        screenBounds = CalculationsStaticClass.GetScreenBounds();
         pieceMovementHandler = GetComponent<BasePieceMovementHandler>();
         Debug.Log("ScreenBoundY: " + -screenBounds.y);
     }

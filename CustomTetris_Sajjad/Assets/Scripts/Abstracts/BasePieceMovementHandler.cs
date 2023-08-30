@@ -127,18 +127,8 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
             IsMoveable = false;
             _myRigidBody.useGravity = true;
             UpdatePieceState(PieceState.IsPlaced);
-            //Managers.PieceSpawner.SpawnPiece();
+            Debug.Log("Collision Enter");
         }
-
-        //if (collision.gameObject.CompareTag("surface") || collision.gameObject.CompareTag("Block"))
-        //{
-        //    IsPlaced = true;
-        //    IsMoveable = false;
-        //    _myRigidBody.useGravity = true;
-        //    UpdatePieceState(PieceState.IsPlaced);
-        //    Debug.Log("")
-        //    //Managers.PiecesObjectPooler.UpdateActivePieceReference(null);
-        //}
     }
 
     private void UpdatePieceState(PieceState pieceState)

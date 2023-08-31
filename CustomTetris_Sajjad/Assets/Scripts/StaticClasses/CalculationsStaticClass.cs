@@ -10,9 +10,9 @@ public static class CalculationsStaticClass
         return Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0));
     }
 
-    public static float GetVerticalDistance(float value, float referenceYPosition, Vector3 referenceObjectScale)
+    public static float GetVerticalDistance(float value, float referenceYPosition, float refObjectYScale)
     {
-        float pointOfOrigin = referenceYPosition + (referenceObjectScale.y / 2);
+        float pointOfOrigin = referenceYPosition + (refObjectYScale / 2);
         return value + pointOfOrigin;
     }
 }

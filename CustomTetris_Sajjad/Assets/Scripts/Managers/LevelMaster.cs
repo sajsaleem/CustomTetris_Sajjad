@@ -4,5 +4,13 @@ using UnityEngine;
 
 public class LevelMaster : BaseLevelMaster
 {
+    private void Start()
+    {
+        Initialize();
+    }
 
+    public override void Initialize()
+    {
+        base.Initialize();
+    }
 }

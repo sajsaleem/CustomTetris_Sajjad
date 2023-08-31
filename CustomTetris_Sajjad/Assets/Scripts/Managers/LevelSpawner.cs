@@ -10,9 +10,8 @@ public class LevelSpawner : BaseLevelSpawner
         InstantiateLevelPrefab(LevelType.SinglePlayer);
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void InstantiateLevelPrefab(LevelType _levelType)
     {
-        
+        base.InstantiateLevelPrefab(_levelType);
     }
 }

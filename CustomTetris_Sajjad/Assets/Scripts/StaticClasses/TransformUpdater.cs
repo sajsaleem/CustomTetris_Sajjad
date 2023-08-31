@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoPropertiesUpdateStaticClass : MonoBehaviour
+public class TransformUpdater : MonoBehaviour
 {
     public static GameObject CreateNewGameObject(string name = "")
     {

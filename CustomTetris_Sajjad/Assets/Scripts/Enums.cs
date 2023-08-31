@@ -3,7 +3,8 @@ public enum PieceState
     Falling = 0,
     FreeFall = 1,
     IsPlaced = 2,
-    Disabled = 3
+    InStableState = 3,
+    Disabled = 4
 }
 
 public enum LevelType

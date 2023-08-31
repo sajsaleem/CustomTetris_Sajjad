@@ -16,6 +16,7 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
     private float targetRotation = default;
     private float rotationSpeed = default;
     private float fallSpeed = default;
+    private float placedheight = default;
     #endregion
 
     #region properties
@@ -37,6 +38,7 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
         IsMoveable = true;
         rotatePiece = false;
         UpdatePieceState(PieceState.Falling);
+        placedheight = 0;
     }
 
     public virtual void MyEnable()
@@ -97,6 +99,12 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
 
         transform.position = Vector3.zero;
         _myRigidBody.freezeRotation = true;
+        placedheight = 0;
+    }
+
+    public virtual void RemoveBlockHeightFromTower()
+    {
+        Managers.TowerManager.RemoveBlock(placedheight);
     }
     #endregion
 
@@ -115,6 +123,17 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
         {
             _myRigidBody.velocity = new Vector3(0, fallSpeed, 0);
         }
+
+        if (IsPlaced)
+        {
+            AddToTowerHeight();
+        }
+
+        if(_myRigidBody.velocity.magnitude <= 0)
+        {
+            UpdatePieceState(PieceState.InStableState);
+        }
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -127,13 +146,23 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
             IsMoveable = false;
             _myRigidBody.useGravity = true;
             UpdatePieceState(PieceState.IsPlaced);
-            Debug.Log("Collision Enter");
         }
     }
 
     private void UpdatePieceState(PieceState pieceState)
     {
-        _pieceState = pieceState;
+        if (_pieceState != pieceState)
+            _pieceState = pieceState;
+    }
+
+    private void AddToTowerHeight()
+    {
+        if(placedheight <= 0 && _pieceState == PieceState.InStableState)
+        {
+            Transform heighestChild = CalculationsStaticClass.GetHeighestTransformInChildren(rotationPivot);
+            placedheight = CalculationsStaticClass.GetObjectHeight(heighestChild);
+            Managers.TowerManager.AddBlock(placedheight);
+        }
     }
     #endregion
 }

@@ -90,16 +90,9 @@ public class InputManager : MonoBehaviour
         }
 
         //swipe down
-        else if (swipeDirection.y < 0 && swipeDirection.x > -0.5f && swipeDirection.x < 0.5f)
+        else if ( (Time.time - touchPhaseStart < (tapInterval + 1f)) && swipeDirection.y > -0.5f && swipeDirection.x > -0.5f && swipeDirection.x < 0.5f)
         {
             Managers.PiecesObjectPooler.ActivePiece.FreeFallPiece();
-            //Managers.PiecesObjectPooler.UpdateActivePieceReference(null);
-
-            //if (Managers.Game.currentShape != null)
-            //{
-            //    isActive = false;
-            //    Managers.Game.currentShape.movementController.InstantFall();
-            //}
         }
 
     }

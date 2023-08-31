@@ -7,10 +7,10 @@ using UnityEngine;
 public class Managers : MonoBehaviour
 {
     private static IPiecesObjectPooler piecesObjectPooler;
+    private static ITowerManager towerManager;
+    private static ILevelSpawner levelSpawner;
 
-    public static PieceSpawner pieceSpawner;
-
-    public static PieceSpawner PieceSpawner => pieceSpawner;
+    public static ILevelSpawner LevelSpawner => levelSpawner;
 
 
     public static IPiecesObjectPooler PiecesObjectPooler
@@ -25,10 +25,23 @@ public class Managers : MonoBehaviour
             //=> piecesObjectPooler;
     }
 
+    public static ITowerManager TowerManager
+    {
+        get
+        {
+            if (towerManager == null)
+                return NullTowerManager.Instance;
+
+            return towerManager;
+        }
+    }
+
+
+
 
     private void Awake()
     {
         piecesObjectPooler = GetComponent<IPiecesObjectPooler>();
-        pieceSpawner = FindObjectOfType<PieceSpawner>();
+        towerManager = GetComponent<ITowerManager>();
     }
 }

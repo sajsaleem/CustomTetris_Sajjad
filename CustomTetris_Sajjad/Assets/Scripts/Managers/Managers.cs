@@ -8,10 +8,8 @@ public class Managers : MonoBehaviour
 {
     private static IPiecesObjectPooler piecesObjectPooler;
     private static ITowerManager towerManager;
-    private static ILevelSpawner levelSpawner;
     private static IGameManager gameManager;
-
-    public static ILevelSpawner LevelSpawner => levelSpawner;
+    private static ILevelMaster levelMaster;
 
 
     public static IPiecesObjectPooler PiecesObjectPooler
@@ -47,12 +45,24 @@ public class Managers : MonoBehaviour
         }
     }
 
+    public static ILevelMaster LevelMaster
+    {
+        get
+        {
+            if (LevelMaster == null)
+                return NullLevelMaster.Instance;
+
+            return LevelMaster;
+        }
+    }
+
 
 
     private void Awake()
     {
         piecesObjectPooler = GetComponent<IPiecesObjectPooler>();
         towerManager = GetComponent<ITowerManager>();
-        gameManager = GetComponent<GameManager>();
+        gameManager = GetComponent<IGameManager>();
+        levelMaster = GetComponent<ILevelMaster>();
     }
 }

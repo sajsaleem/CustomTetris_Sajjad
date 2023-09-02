@@ -3,19 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 
-public class PieceSpawner : MonoBehaviour
+public class BlockSpawner : MonoBehaviour
 {
     private float leftPositionX , RightPositionX;
 
-    [SerializeField] private UnityLayers unityLayer; 
+    [SerializeField] private UnityLayers unityLayer;
+    [SerializeField] private Transform blockSpawner;
+
+    private IPlayerProgressTracker playerProgressTracker;
 
     BasePieceMovementHandler newPiece;
 
     // Start is called before the first frame update
     void Start()
     {
-        leftPositionX = transform.position.x - (transform.localScale.x / 2);
-        RightPositionX = transform.position.x + (transform.localScale.x / 2);
+        leftPositionX = blockSpawner.position.x - (blockSpawner.localScale.x / 2);
+        RightPositionX = blockSpawner.position.x + (blockSpawner.localScale.x / 2);
+        playerProgressTracker = GetComponent<IPlayerProgressTracker>();
         StartCoroutine(_Spawner());
     }
 
@@ -29,7 +33,7 @@ public class PieceSpawner : MonoBehaviour
         newPiece.gameObject.layer = (int)unityLayer;
         float randomXPosition = Random.Range(leftPositionX, RightPositionX);
         newPiece.transform.position = new Vector3(randomXPosition, transform.position.y, newPiece.transform.position.z);
-        newPiece.Initialize();
+        newPiece.Initialize(playerProgressTracker);
     }
 
     private bool PoolIsNull()

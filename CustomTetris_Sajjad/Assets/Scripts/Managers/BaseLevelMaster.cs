@@ -16,7 +16,7 @@ public abstract class BaseLevelMaster : MonoBehaviour,ILevelMaster
     public bool ShouldGenerateUniqueLevel { get => _shouldGenerateUniqueLevels; }
     public bool ShouldGenerateRandomLevel { get => _shouldGenerateRandomLevels; }
 
-    public void SetNewLevelSetting()
+    public virtual void SetNewLevelSetting()
     {
         if(_shouldGenerateRandomLevels)
         {
@@ -29,7 +29,7 @@ public abstract class BaseLevelMaster : MonoBehaviour,ILevelMaster
         }
     }
 
-    public LevelData GetUniqueLevel()
+    private LevelData GetUniqueLevel()
     {
         for (int i = 0; i < LevelSettingsList.Count; i++)
         {
@@ -40,10 +40,20 @@ public abstract class BaseLevelMaster : MonoBehaviour,ILevelMaster
         return new LevelData();
     }
 
-    public LevelData GetLevel()
+    public virtual LevelData GetLevel()
     {
         activeLevelData.isUsed = true;
         return activeLevelData;
+    }
+
+    public int WinCondition()
+    {
+        return activeLevelData.winCondition;
+    }
+
+    public int LossCondition()
+    {
+        return activeLevelData.lossCondition;
     }
 
 

@@ -17,8 +17,8 @@ public class PieceData
 public class LevelData
 {
     public Vector3 surfaceDimensions = default;
-    public List<Vector3> surfacePosition = default;
-    public float winCondition = default;
+    public Vector3 surfacePosition = default;
+    public int winCondition = default;
     public int lossCondition = default;
 
     [HideInInspector] public bool isUsed = default;

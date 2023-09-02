@@ -17,6 +17,7 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
     private float rotationSpeed = default;
     private float fallSpeed = default;
     private float placedheight = default;
+    private IPlayerProgressTracker playerProgressTracker;
     #endregion
 
     #region properties
@@ -30,7 +31,7 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
     #endregion
 
     #region Virtual Functions
-    public virtual void Initialize()
+    public virtual void Initialize(IPlayerProgressTracker _playerProgressTracker)
     {
         _myRigidBody ??= GetComponent<Rigidbody>();
         _myRigidBody.freezeRotation = false;
@@ -39,6 +40,7 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
         rotatePiece = false;
         UpdatePieceState(PieceState.Falling);
         placedheight = 0;
+        playerProgressTracker = _playerProgressTracker;
     }
 
     public virtual void MyEnable()
@@ -161,7 +163,8 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
         {
             Transform heighestChild = CalculationsStaticClass.GetHeighestTransformInChildren(rotationPivot);
             placedheight = CalculationsStaticClass.GetObjectHeight(heighestChild);
-            Managers.TowerManager.AddBlock(placedheight);
+            playerProgressTracker.TowerManager.AddBlock(placedheight);
+            //Managers.TowerManager.AddBlock(placedheight);
         }
     }
     #endregion

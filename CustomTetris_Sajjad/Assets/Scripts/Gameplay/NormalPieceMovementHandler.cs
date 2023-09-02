@@ -20,9 +20,9 @@ public class NormalPieceMovementHandler : BasePieceMovementHandler
         base.MyEnable();
     }
 
-    public override void Initialize()
+    public override void Initialize(IPlayerProgressTracker playerProgressTracker)
     {
-        base.Initialize();
+        base.Initialize(playerProgressTracker);
     }
 
     public override void MovePieceSideWays(float moveAmount)

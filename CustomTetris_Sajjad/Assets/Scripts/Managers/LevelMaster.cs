@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class LevelMaster : BaseLevelMaster
 {
+
+    public override void SetNewLevelSetting()
+    {
+        base.SetNewLevelSetting();
+    }
+
+    public override LevelData GetLevel()
+    {
+        return base.GetLevel();
+    }
     //private void Start()
     //{
     //    Initialize();

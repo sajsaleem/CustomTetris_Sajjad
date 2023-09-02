@@ -12,7 +12,7 @@ public interface IPieceMovementHandler
     Vector3 LocalScale { get; }
     Vector3 Position { get; }
 
-    void Initialize();
+    void Initialize(IPlayerProgressTracker playerProgressTracker);
     void RotatePiece();
     void MovePieceSideWays(float value);
     void Reset();

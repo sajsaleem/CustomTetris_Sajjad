@@ -7,7 +7,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject startButton;
     public void OnStartCallBack()
     {
-        Managers.GameManager.StartPlay(LevelType.SinglePlayer);
+        Managers.GameManager.StartPlay(GameModeType.SinglePlayer);
         startButton.SetActive(false);
     }
 }

@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour, IGameManager
     public void StartPlay(GameModeType _gameModeType)
     {
         GameState = GameStates.GameplayState;
-        Managers.LevelSpawner.InstantiateLevelPrefab(_gameModeType);
+        //Managers.LevelSpawner.InstantiateLevelPrefab(_gameModeType);
     }
 
     private void Update()

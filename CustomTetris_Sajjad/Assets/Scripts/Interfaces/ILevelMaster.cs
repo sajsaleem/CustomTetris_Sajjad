@@ -16,6 +16,10 @@ public interface ILevelMaster
     List<BaseLevelSettings> UsedLevelsList { get; }
     bool ShouldGenerateUniqueLevel { get; }
     bool ShouldGenerateRandomLevel { get; }
+
     LevelData GetLevel();
+    int WinCondition();
+    int LossCondition();
+    void SetNewLevelSetting();
 
 }

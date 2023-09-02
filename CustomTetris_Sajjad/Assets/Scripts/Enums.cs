@@ -12,3 +12,17 @@ public enum LevelType
     SinglePlayer = 0,
     TwoPlayer = 1
 }
+
+public enum GameStates
+{
+    StartState = 0,
+    GameplayState = 1,
+    PauseState = 2,
+    GameOverState = 3
+}
+
+public enum PlayerTags
+{
+    Player0 = 0,
+    Player1 = 1
+}

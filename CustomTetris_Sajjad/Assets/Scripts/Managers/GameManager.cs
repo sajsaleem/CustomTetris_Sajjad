@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour, IGameManager
 {
+    public GameStates GameState { get; private set; } = default;
+
     public void StartPlay(LevelType levelType)
     {
+        GameState = GameStates.GameplayState;
         Managers.LevelSpawner.InstantiateLevelPrefab(levelType);
     }
 

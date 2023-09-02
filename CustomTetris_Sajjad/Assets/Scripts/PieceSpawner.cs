@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 
 public class PieceSpawner : MonoBehaviour
 {
-    private Vector2 Screenbounds;
-
     private float leftPositionX , RightPositionX;
 
     BasePieceMovementHandler newPiece;
@@ -16,15 +14,12 @@ public class PieceSpawner : MonoBehaviour
     {
         leftPositionX = transform.position.x - (transform.localScale.x / 2);
         RightPositionX = transform.position.x + (transform.localScale.x / 2);
-        //SpawnPiece();
-
         StartCoroutine(_Spawner());
     }
 
+
     public void SpawnPiece()
     {
-        Debug.Log("Spawn Piece");
-
         if (PoolIsNull())
             return;
 
@@ -44,6 +39,7 @@ public class PieceSpawner : MonoBehaviour
 
     private IEnumerator _Spawner()
     {
+        yield return new WaitUntil(() => Managers.GameManager.GameState == GameStates.GameplayState);
         while (true)
         {
             SpawnPiece();

@@ -9,6 +9,7 @@ public class Managers : MonoBehaviour
     private static IPiecesObjectPooler piecesObjectPooler;
     private static ITowerManager towerManager;
     private static ILevelSpawner levelSpawner;
+    private static IGameManager gameManager;
 
     public static ILevelSpawner LevelSpawner => levelSpawner;
 
@@ -36,6 +37,16 @@ public class Managers : MonoBehaviour
         }
     }
 
+    public static IGameManager GameManager
+    {
+        get
+        {
+            if (towerManager == null)
+                return NullGameManager.Instance;
+
+            return gameManager;
+        }
+    }
 
 
 
@@ -43,5 +54,6 @@ public class Managers : MonoBehaviour
     {
         piecesObjectPooler = GetComponent<IPiecesObjectPooler>();
         towerManager = GetComponent<ITowerManager>();
+        gameManager = GetComponent<GameManager>();
     }
 }

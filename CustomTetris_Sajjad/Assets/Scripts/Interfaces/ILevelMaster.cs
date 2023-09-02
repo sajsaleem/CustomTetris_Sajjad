@@ -4,9 +4,9 @@ using UnityEngine;
 
 public interface ILevelMaster
 {
-    LevelType LevelType { get; }
+    //LevelType LevelType { get; }
     List<Transform> Surfaces { get; }
     Transform FinishLine { get; }
-    BaseLevelSettings LevelSettings { get; set; }
+    BaseLevelSettings LevelSettings { get; }
     bool IsInstantiated { get; set; }
 }

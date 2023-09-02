@@ -8,19 +8,9 @@ public class InputManager : MonoBehaviour
 
     private Vector3 startPressPosition;
     private Vector3 endPressPosition;
-    private Vector2 currentSwipe;
     private float touchPhaseStart = default;
 
     private bool isTouchActive = true;
-
-    private bool rotateObject = default;
-
-    private float targetRotation = default;
-
-    #region Testing Variables
-    [SerializeField] private Transform testingPiece;
-    [SerializeField] private Transform rotationPivot;
-    #endregion
 
     // Update is called once per frame
     void Update()

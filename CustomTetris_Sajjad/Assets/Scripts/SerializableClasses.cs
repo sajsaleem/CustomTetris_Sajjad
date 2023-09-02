@@ -20,6 +20,6 @@ public class LevelData
     public List<Vector3> surfacePosition = default;
     public float winCondition = default;
     public int lossCondition = default;
-    public BaseLevelMaster levelPrefab;
-    [HideInInspector] public bool isInstantiated = default;
+    //public BaseLevelMaster levelPrefab;
+    //[HideInInspector] public bool isInstantiated = default;
 }

@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 8755885439132059907}
   - component: {fileID: 744945279093344134}
   - component: {fileID: 8495809547232867535}
+  - component: {fileID: 424935282410166542}
+  - component: {fileID: 5262878938780354881}
   m_Layer: 0
   m_Name: Player1_Env
   m_TagString: Untagged
@@ -77,6 +79,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unityLayer: 0
+  blockSpawner: {fileID: 3763718483071199861}
+--- !u!114 &424935282410166542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5849552313654659501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f229f749893bb47ae5f75f29049e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5262878938780354881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5849552313654659501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91ffc02c0c5db46448be16f2d80f7b3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &237510187241906363
 PrefabInstance:
   m_ObjectHideFlags: 0

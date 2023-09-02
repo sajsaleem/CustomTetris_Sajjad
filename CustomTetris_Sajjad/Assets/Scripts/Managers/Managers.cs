@@ -23,7 +23,6 @@ public class Managers : MonoBehaviour
 
             return piecesObjectPooler;
         }
-            //=> piecesObjectPooler;
     }
 
     public static ITowerManager TowerManager

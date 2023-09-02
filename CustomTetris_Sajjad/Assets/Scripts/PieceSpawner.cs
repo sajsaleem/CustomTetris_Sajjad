@@ -7,6 +7,8 @@ public class PieceSpawner : MonoBehaviour
 {
     private float leftPositionX , RightPositionX;
 
+    [SerializeField] private UnityLayers unityLayer; 
+
     BasePieceMovementHandler newPiece;
 
     // Start is called before the first frame update
@@ -24,6 +26,7 @@ public class PieceSpawner : MonoBehaviour
             return;
 
         newPiece = Managers.PiecesObjectPooler.Pool.Get();
+        newPiece.gameObject.layer = (int)unityLayer;
         float randomXPosition = Random.Range(leftPositionX, RightPositionX);
         newPiece.transform.position = new Vector3(randomXPosition, transform.position.y, newPiece.transform.position.z);
         newPiece.Initialize();

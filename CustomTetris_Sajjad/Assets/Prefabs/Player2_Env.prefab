@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd4720ecc8d7674c85a3950a2fdb001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unityLayer: 6
 --- !u!1 &6697418733667665596
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,6 +149,7 @@ MonoBehaviour:
   surfaces:
   - {fileID: 1104331850857329915}
   finishLine: {fileID: 5111511032665473879}
+  levelSettings: {fileID: 0}
 --- !u!1001 &1241069910801509363
 PrefabInstance:
   m_ObjectHideFlags: 0

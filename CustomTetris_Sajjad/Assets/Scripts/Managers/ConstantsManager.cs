@@ -8,4 +8,9 @@ public class ConstantsManager
     {
         public const string ScriptableObjects = "Scriptable Objects";
     }
+
+    public static class FileNames
+    {
+        public const string UnityLayers = "UnityLayers";
+    }
 }

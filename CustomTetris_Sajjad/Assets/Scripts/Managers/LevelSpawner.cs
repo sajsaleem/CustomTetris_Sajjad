@@ -10,7 +10,7 @@ public class LevelSpawner : BaseLevelSpawner
         //InstantiateLevelPrefab(LevelType.SinglePlayer);
     }
 
-    public override void InstantiateLevelPrefab(LevelType _levelType)
+    public override void InstantiateLevelPrefab(GameModeType _gameModeType)
     {
         base.InstantiateLevelPrefab(_levelType);
     }

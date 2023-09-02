@@ -11,7 +11,7 @@ public abstract  class BaseLevelSpawner : MonoBehaviour, ILevelSpawner
 
     public List<BaseLevelSettings> LevelScriptableObjects => levelScriptableObjects;
 
-    public virtual void InstantiateLevelPrefab(LevelType _levelType) 
+    public virtual void InstantiateLevelPrefab(GameModeType _gameModeType) 
     {
 
         //BaseLevelSettings _levelSettings = levelScriptableObjects.First(t => t.level.levelPrefab.LevelType == _levelType);
@@ -37,7 +37,7 @@ public abstract  class BaseLevelSpawner : MonoBehaviour, ILevelSpawner
         return false;
     }
 
-    private void ActivateLevel(LevelType _levelType)
+    private void ActivateLevel(GameModeType _gameModeType)
     {
         //instantiatedLevels.ForEach(
         //    obj =>

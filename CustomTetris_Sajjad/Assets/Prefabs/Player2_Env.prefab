@@ -107,7 +107,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7656969308466668659}
-  - component: {fileID: 5445206662938363508}
   m_Layer: 6
   m_Name: Player2_Env
   m_TagString: Untagged
@@ -133,23 +132,6 @@ Transform:
   - {fileID: 5314345597557586094}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5445206662938363508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6697418733667665596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c689d1c7f5ce904499288c2eca307c96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelType: 0
-  surfaces:
-  - {fileID: 1104331850857329915}
-  finishLine: {fileID: 5111511032665473879}
-  levelSettings: {fileID: 0}
 --- !u!1001 &1241069910801509363
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -6,5 +6,5 @@ public interface ILevelSpawner
 {
     List<BaseLevelSettings> LevelScriptableObjects { get; }
 
-    void InstantiateLevelPrefab(LevelType levelType);
+    void InstantiateLevelPrefab(GameModeType levelType);
 }

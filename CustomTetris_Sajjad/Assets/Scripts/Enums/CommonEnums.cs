@@ -7,7 +7,7 @@ public enum PieceState
     Disabled = 4
 }
 
-public enum LevelType
+public enum GameModeType
 {
     SinglePlayer = 0,
     TwoPlayer = 1

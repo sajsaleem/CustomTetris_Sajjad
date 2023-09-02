@@ -5,6 +5,6 @@ using UnityEngine;
 public interface IGameManager
 {
     GameStates GameState { get; }
-    void StartPlay(LevelType levelType);
+    void StartPlay(GameModeType _gameModeType);
     void EndPlay();
 }

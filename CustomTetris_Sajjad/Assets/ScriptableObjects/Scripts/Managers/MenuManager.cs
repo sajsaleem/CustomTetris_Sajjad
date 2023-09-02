@@ -5,6 +5,7 @@ using UnityEngine;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject startButton;
+
     public void OnStartCallBack()
     {
         Managers.GameManager.StartPlay(GameModeType.SinglePlayer);

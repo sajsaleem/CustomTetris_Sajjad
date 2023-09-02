@@ -18,6 +18,8 @@ public class NullGameManager : IGameManager
     }
 
     public GameStates GameState { get; private set; } = default;
+    public GameModeType ActiveGameMode { get; private set; } = default;
+
 
     public void StartPlay(GameModeType _gameModeType)
     {

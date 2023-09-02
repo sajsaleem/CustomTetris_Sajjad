@@ -31,4 +31,14 @@ public class NullLevelMaster : ILevelMaster
     {
 
     }
+
+    public int WinCondition()
+    {
+        return 0;
+    }
+
+    public int LossCondition()
+    {
+        return 0;
+    }
 }

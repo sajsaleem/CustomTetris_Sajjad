@@ -13,6 +13,7 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
     #region private fields
     private Rigidbody _myRigidBody;
     private bool rotatePiece = default;
+    private bool isAddedToTower = default;
     private float targetRotation = default;
     private float rotationSpeed = default;
     private float fallSpeed = default;
@@ -106,11 +107,18 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
 
     public virtual void RemoveBlockHeightFromTower()
     {
-        Managers.TowerManager.RemoveBlock(placedheight);
+        playerProgressTracker.TowerManager.RemoveBlock(placedheight);
+        //Managers.TowerManager.RemoveBlock(placedheight);
     }
     #endregion
 
     #region Private Functions
+
+    private void OnDisable()
+    {
+        isAddedToTower = false;
+    }
+
     private void HandleRotationDisable(float rotateValue)
     {
         if (Mathf.Approximately(rotateValue, targetRotation))
@@ -121,6 +129,7 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
 
     private void FixedUpdate()
     {
+
         if (!IsPlaced)
         {
             _myRigidBody.velocity = new Vector3(0, fallSpeed, 0);
@@ -134,6 +143,10 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
         if(_myRigidBody.velocity.magnitude <= 0)
         {
             UpdatePieceState(PieceState.InStableState);
+        }
+        else
+        {
+            UpdatePieceState(PieceState.Falling);
         }
 
     }
@@ -159,12 +172,12 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
 
     private void AddToTowerHeight()
     {
-        if(placedheight <= 0 && _pieceState == PieceState.InStableState)
+        if(placedheight <= 0 && _pieceState == PieceState.InStableState && !isAddedToTower)
         {
             Transform heighestChild = CalculationsStaticClass.GetHeighestTransformInChildren(rotationPivot);
             placedheight = CalculationsStaticClass.GetObjectHeight(heighestChild);
             playerProgressTracker.TowerManager.AddBlock(placedheight);
-            //Managers.TowerManager.AddBlock(placedheight);
+            isAddedToTower = true;
         }
     }
     #endregion

@@ -18,12 +18,13 @@ public abstract class BaseLevelMaster : MonoBehaviour,ILevelMaster
 
     public virtual void SetNewLevelSetting()
     {
-        if(_shouldGenerateRandomLevels)
+
+        if (_shouldGenerateRandomLevels)
         {
             activeLevelData = _levelSettingsList[Random.Range(0, _levelSettingsList.Count)].level;
         }
 
-        else if(_shouldGenerateUniqueLevels)
+        else if (_shouldGenerateUniqueLevels)
         {
             activeLevelData = GetUniqueLevel();
         }

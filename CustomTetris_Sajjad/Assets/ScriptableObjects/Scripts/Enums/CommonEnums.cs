@@ -16,7 +16,7 @@ public enum GameModeType
 public enum GameStates
 {
     StartState = 0,
-    GameplayState = 1,
+    PlayState = 1,
     PauseState = 2,
     GameOverState = 3
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public interface IPlayersSpawner
 {
     List<PlayerType> PlayerEnvironments { get; }
-    List<PlayerType> InstantiatedEnvironments { get; }
+    List<PlayerType> InstantiatedPlayers { get; }
 
-    void SpawnPlayer(PlayerTags playerTag);
+    void SpawnPlayers(GameModeType _gameModeType);
 }

@@ -27,6 +27,7 @@ public class PlayerPieceReturnToPool : BaseReturnToPool
     {
         base.OnOutOfBounds();
         Managers.PiecesObjectPooler.Pool.Release(pieceMovementHandler);
+        pieceMovementHandler.RemoveBlockHeightFromTower();
         pieceMovementHandler.Reset();
     }
 

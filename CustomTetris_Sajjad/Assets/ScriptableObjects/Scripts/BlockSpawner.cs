@@ -32,7 +32,7 @@ public class BlockSpawner : MonoBehaviour
         newPiece = Managers.PiecesObjectPooler.Pool.Get();
         newPiece.gameObject.layer = (int)unityLayer;
         float randomXPosition = Random.Range(leftPositionX, RightPositionX);
-        newPiece.transform.position = new Vector3(randomXPosition, transform.position.y, newPiece.transform.position.z);
+        newPiece.transform.position = new Vector3(randomXPosition, blockSpawner.position.y, newPiece.transform.position.z);
         newPiece.Initialize(playerProgressTracker);
     }
 
@@ -46,17 +46,13 @@ public class BlockSpawner : MonoBehaviour
 
     private IEnumerator _Spawner()
     {
-        yield return new WaitUntil(() => Managers.GameManager.GameState == GameStates.GameplayState);
-        while (true)
+        yield return new WaitUntil(() => Managers.GameManager.GameState == GameStates.PlayState);
+
+        while (Managers.GameManager.GameState == GameStates.PlayState)
         {
             SpawnPiece();
-
-            Debug.Log("IsPlaced: " + Managers.PiecesObjectPooler.ActivePiece.IsPlaced);
-
             yield return new WaitUntil(() => newPiece.IsPlaced);
         }
-
-        yield break;
     }
 
 }

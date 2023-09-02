@@ -19,6 +19,8 @@ public class PlayerEnvironmentSetter : MonoBehaviour
         _levelData = Managers.LevelMaster.GetLevel();
         surface.position = _levelData.surfacePosition;
         surface.localScale = _levelData.surfaceDimensions;
-        finishLine.position = _levelData.surfacePosition;
+        float finishLineYPos = CalculationsStaticClass.GetVerticalDistance(_levelData.winCondition, surface.position.y, surface.localScale.y);
+        finishLine.position = new Vector3(finishLine.position.x, finishLineYPos, finishLine.position.z);
+        //finishLine.position = _levelData.winCondition;
     }
 }

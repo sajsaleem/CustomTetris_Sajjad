@@ -22,8 +22,8 @@ public class TowerManager : MonoBehaviour, ITowerManager
 
     public void RemoveBlock(float value)
     {
-        float newVal = value - TowerHeight;
-        TowerHeight -= newVal;
+        //float newVal = TowerHeight - value;
+        TowerHeight -= value;
         UpdateTowerHeight();
     }
 

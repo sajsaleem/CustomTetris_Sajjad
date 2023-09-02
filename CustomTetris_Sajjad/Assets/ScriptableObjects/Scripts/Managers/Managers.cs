@@ -2,14 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//[RequireComponent(typeof(IPiecesObjectPooler))]
-
 public class Managers : MonoBehaviour
 {
     private static IPiecesObjectPooler piecesObjectPooler;
-    private static ITowerManager towerManager;
     private static IGameManager gameManager;
     private static ILevelMaster levelMaster;
+    private static IPlayersSpawner playersSpawner;
 
 
     public static IPiecesObjectPooler PiecesObjectPooler
@@ -23,22 +21,11 @@ public class Managers : MonoBehaviour
         }
     }
 
-    public static ITowerManager TowerManager
-    {
-        get
-        {
-            if (towerManager == null)
-                return NullTowerManager.Instance;
-
-            return towerManager;
-        }
-    }
-
     public static IGameManager GameManager
     {
         get
         {
-            if (towerManager == null)
+            if (gameManager == null)
                 return NullGameManager.Instance;
 
             return gameManager;
@@ -49,10 +36,23 @@ public class Managers : MonoBehaviour
     {
         get
         {
-            if (LevelMaster == null)
+            if (levelMaster == null)
+            {
                 return NullLevelMaster.Instance;
+            }
 
-            return LevelMaster;
+            return levelMaster;
+        }
+    }
+
+    public static IPlayersSpawner PlayersSpawner
+    {
+        get
+        {
+            if (levelMaster == null)
+                return NullPlayersSpawner.Instance;
+
+            return playersSpawner;
         }
     }
 
@@ -61,8 +61,8 @@ public class Managers : MonoBehaviour
     private void Awake()
     {
         piecesObjectPooler = GetComponent<IPiecesObjectPooler>();
-        towerManager = GetComponent<ITowerManager>();
         gameManager = GetComponent<IGameManager>();
         levelMaster = GetComponent<ILevelMaster>();
+        playersSpawner = GetComponent<IPlayersSpawner>();
     }
 }

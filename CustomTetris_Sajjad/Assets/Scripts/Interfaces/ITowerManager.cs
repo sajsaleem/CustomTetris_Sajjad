@@ -5,8 +5,10 @@ using UnityEngine;
 public interface ITowerManager
 {
     float TowerHeight { get; }
-    void AddBlock(float value);
-    void RemoveBlock(float value);
+    //void AddBlock(float value);
+    void AddBlock(Transform _transform);
+    //void RemoveBlock(float value);
+    void RemoveBlock(Transform _transform);
     void UpdateTowerHeight();
     void Reset();
 }

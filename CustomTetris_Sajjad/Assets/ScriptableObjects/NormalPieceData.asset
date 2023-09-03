@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: NormalPieceData
   m_EditorClassIdentifier: 
   pieceData:
-    normalFallSpeed: 0.5
-    freefallSpeed: 2
-    rotationSpeed: 300
+    normalFallSpeed: 0.3
+    freefallSpeed: 1
+    rotationSpeed: 1000
     targetRotation: 90
-    gravity: -9.81
+    gravity: {x: 0, y: -20, z: 0}
     localScale: {x: 1, y: 1, z: 1}

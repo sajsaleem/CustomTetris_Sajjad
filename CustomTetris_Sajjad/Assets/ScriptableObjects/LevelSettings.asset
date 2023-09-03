@@ -13,10 +13,8 @@ MonoBehaviour:
   m_Name: LevelSettings
   m_EditorClassIdentifier: 
   level:
-    surfaceDimensions: {x: 6, y: 1, z: 1}
-    surfacePosition:
-    - {x: 0, y: 1, z: 0}
+    surfaceDimensions: {x: 10, y: 5, z: 1}
+    surfacePosition: {x: 0, y: 2, z: 0}
     winCondition: 40
     lossCondition: 5
-    levelPrefab: {fileID: 8714425929978300177, guid: f531af1bca513ed4792d2a2f292ab418, type: 3}
-    isInstantiated: 1
+    isUsed: 1

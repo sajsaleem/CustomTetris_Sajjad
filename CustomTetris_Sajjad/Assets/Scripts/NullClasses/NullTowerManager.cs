@@ -19,12 +19,22 @@ public class NullTowerManager : ITowerManager
 
     public float TowerHeight { get; private set; } = default;
 
-    public void AddBlock(float value)
+    //public void AddBlock(float value)
+    //{
+
+    //}
+
+    //public void RemoveBlock(float value)
+    //{
+
+    //}
+
+    public void AddBlock(Transform _transform)
     {
 
     }
 
-    public void RemoveBlock(float value)
+    public void RemoveBlock(Transform _transform)
     {
 
     }

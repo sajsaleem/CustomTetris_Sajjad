@@ -330,6 +330,7 @@ GameObject:
   - component: {fileID: 92875284287936658}
   - component: {fileID: 8358936445457641087}
   - component: {fileID: 6937122779019739424}
+  - component: {fileID: -6185135363240382904}
   m_Layer: 0
   m_Name: JBlock
   m_TagString: Block
@@ -362,8 +363,8 @@ Rigidbody:
   m_GameObject: {fileID: 8165702054727266443}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 1
+  m_AngularDrag: 10
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -407,6 +408,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04064dd9d26989c4093bbe131cf2f36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!75 &-6185135363240382904
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8165702054727266443}
+  m_Enabled: 1
+  m_Force: {x: 0, y: 0, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!1 &8681249081370802030
 GameObject:
   m_ObjectHideFlags: 0

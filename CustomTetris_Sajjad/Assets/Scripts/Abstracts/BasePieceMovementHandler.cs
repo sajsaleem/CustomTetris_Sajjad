@@ -12,12 +12,14 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
 
     #region private fields
     private Rigidbody _myRigidBody;
+    private ConstantForce _constantForce;
     private bool rotatePiece = default;
     private bool isAddedToTower = default;
     private float targetRotation = default;
     private float rotationSpeed = default;
     private float fallSpeed = default;
     private float placedheight = default;
+    private float _gravity = default;
     private IPlayerProgressTracker playerProgressTracker;
     #endregion
 
@@ -35,7 +37,10 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
     public virtual void Initialize(IPlayerProgressTracker _playerProgressTracker)
     {
         _myRigidBody ??= GetComponent<Rigidbody>();
+        _constantForce ??= GetComponent<ConstantForce>();
         _myRigidBody.freezeRotation = false;
+        _constantForce.force = pieceSettings.pieceData.gravity;
+        _constantForce.enabled = false;
         IsPlaced = false;
         IsMoveable = true;
         rotatePiece = false;
@@ -49,6 +54,8 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
         targetRotation = pieceSettings.pieceData.targetRotation;
         rotationSpeed = pieceSettings.pieceData.rotationSpeed;
         fallSpeed = pieceSettings.CalculateNormalFallSpeed();
+        //_gravity = pieceSettings.pieceData.gravity;
+
     }
 
     public virtual void RotatePiece()
@@ -73,7 +80,27 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
         if (!IsMoveable)
             return;
 
-        transform.Translate(new Vector3(moveAmount, 0, 0));
+        if (!IsMoveable)
+            return;
+
+        //Debug.Log("10/Screen.dpi: " + 10 / Screen.dpi);
+#if UNITY_ANDROID || UNITY_IOS
+        transform.position += new Vector3(Mathf.Sign(moveAmount) * 5f * Time.deltaTime, 0, 0);
+#endif
+#if UNITY_EDITOR
+        transform.position += new Vector3(Mathf.Sign(moveAmount) * 10 * Time.deltaTime, 0, 0);
+#endif
+
+
+        //float newPosition = transform.position.x + Mathf.Sign(moveAmount);
+        //newPosition = Mathf.MoveTowards(transform.position.x, newPosition, 2 * Time.unscaledDeltaTime);
+        //transform.position = new Vector3(newPosition, transform.position.y, transform.position.z);
+
+        //Debug.Log("moveAmount: " + moveAmount);
+        //if (!IsMoveable)
+        //    return;
+
+        //transform.Translate(new Vector3(moveAmount, 0, 0));
     }
 
     public virtual void MyUpdate()
@@ -107,7 +134,7 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
 
     public virtual void RemoveBlockHeightFromTower()
     {
-        playerProgressTracker.TowerManager.RemoveBlock(placedheight);
+        playerProgressTracker.TowerManager.RemoveBlock(rotationPivot);
         //Managers.TowerManager.RemoveBlock(placedheight);
     }
     #endregion
@@ -129,7 +156,6 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
 
     private void FixedUpdate()
     {
-
         if (!IsPlaced)
         {
             _myRigidBody.velocity = new Vector3(0, fallSpeed, 0);
@@ -140,7 +166,7 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
             AddToTowerHeight();
         }
 
-        if(_myRigidBody.velocity.magnitude <= 0)
+        if(_myRigidBody.velocity.magnitude <= 0.005f)
         {
             UpdatePieceState(PieceState.InStableState);
         }
@@ -159,7 +185,8 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
         {
             IsPlaced = true;
             IsMoveable = false;
-            _myRigidBody.useGravity = true;
+            _constantForce.enabled = true;
+            //_myRigidBody.useGravity = true;
             UpdatePieceState(PieceState.IsPlaced);
         }
     }
@@ -172,11 +199,11 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
 
     private void AddToTowerHeight()
     {
-        if(placedheight <= 0 && _pieceState == PieceState.InStableState && !isAddedToTower)
+        if (placedheight <= 0 && _pieceState == PieceState.InStableState && !isAddedToTower)
         {
-            Transform heighestChild = CalculationsStaticClass.GetHeighestTransformInChildren(rotationPivot);
-            placedheight = CalculationsStaticClass.GetObjectHeight(heighestChild);
-            playerProgressTracker.TowerManager.AddBlock(placedheight);
+            //Transform heighestChild = CalculationsStaticClass.GetHeighestTransformInChildren(rotationPivot);
+            //placedheight = CalculationsStaticClass.GetObjectHeight(heighestChild);
+            playerProgressTracker.TowerManager.AddBlock(rotationPivot);
             isAddedToTower = true;
         }
     }

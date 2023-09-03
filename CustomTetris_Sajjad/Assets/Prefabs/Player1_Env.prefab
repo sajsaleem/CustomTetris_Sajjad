@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8495809547232867535}
   - component: {fileID: 424935282410166542}
   - component: {fileID: 5262878938780354881}
+  - component: {fileID: 8167504966078487749}
   m_Layer: 0
   m_Name: Player1_Env
   m_TagString: Untagged
@@ -104,6 +105,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91ffc02c0c5db46448be16f2d80f7b3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8167504966078487749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5849552313654659501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b078b602602b72a40b56b0658659f87c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tapInterval: 0.2
+  isTouchActive: 0
 --- !u!1001 &237510187241906363
 PrefabInstance:
   m_ObjectHideFlags: 0

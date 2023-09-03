@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: 6927484347619423928}
   - component: {fileID: 8170306855128907155}
   - component: {fileID: -4439138533506944186}
+  - component: {fileID: -7418234982484350628}
   m_Layer: 0
   m_Name: ZBlock
   m_TagString: Block
@@ -291,8 +292,8 @@ Rigidbody:
   m_GameObject: {fileID: 6164645673000238629}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 1
+  m_AngularDrag: 10
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -336,6 +337,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04064dd9d26989c4093bbe131cf2f36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!75 &-7418234982484350628
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6164645673000238629}
+  m_Enabled: 1
+  m_Force: {x: 0, y: 0, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!1 &7038488596314568480
 GameObject:
   m_ObjectHideFlags: 0

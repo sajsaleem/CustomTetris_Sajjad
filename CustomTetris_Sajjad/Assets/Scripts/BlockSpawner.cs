@@ -5,10 +5,13 @@ using System.Threading.Tasks;
 
 public class BlockSpawner : MonoBehaviour,IBlockSpawner
 {
-    private float leftPositionX , RightPositionX;
+    private float leftPositionX , rightPositionX;
+    private float spawnHeight = default;
+
+    private Vector3 worldPosition;
 
     [SerializeField] private UnityLayers unityLayer;
-    [SerializeField] private Transform blockSpawner;
+    //[SerializeField] private Transform blockSpawner;
 
     private IPlayerProgressTracker playerProgressTracker;
 
@@ -20,8 +23,10 @@ public class BlockSpawner : MonoBehaviour,IBlockSpawner
     // Start is called before the first frame update
     void Start()
     {
-        leftPositionX = blockSpawner.position.x - (blockSpawner.localScale.x / 2);
-        RightPositionX = blockSpawner.position.x + (blockSpawner.localScale.x / 2);
+        Vector2 horizontalSpawnArea = Managers.LevelMaster.GetLevel().horizontalSpawnArea;
+        leftPositionX = CalculationsStaticClass.GetHorizontalViewportToWorldPoint(horizontalSpawnArea.x);
+        rightPositionX = CalculationsStaticClass.GetHorizontalViewportToWorldPoint(horizontalSpawnArea.y);
+        spawnHeight = CalculationsStaticClass.GetVerticalViewportToWorldPoint( Managers.LevelMaster.GetLevel().spawnHeight);
         playerProgressTracker = GetComponent<IPlayerProgressTracker>();
         StartCoroutine(_Spawner());
     }
@@ -34,8 +39,8 @@ public class BlockSpawner : MonoBehaviour,IBlockSpawner
 
         NewBlock = Managers.PiecesObjectPooler.Pool.Get();
         NewBlock.gameObject.layer = (int)unityLayer;
-        float randomXPosition = Random.Range(leftPositionX, RightPositionX);
-        NewBlock.transform.position = new Vector3(randomXPosition, blockSpawner.position.y, NewBlock.transform.position.z);
+        float randomXPosition = Random.Range(leftPositionX, rightPositionX);
+        NewBlock.transform.position = new Vector3(randomXPosition, spawnHeight, NewBlock.transform.position.z);
         NewBlock.Initialize(playerProgressTracker);
     }
 

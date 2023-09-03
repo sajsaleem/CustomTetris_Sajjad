@@ -18,10 +18,10 @@ public class LevelData
 {
     public Vector3 surfaceDimensions = default;
     public Vector3 surfacePosition = default;
+    public Vector2 horizontalSpawnArea; // 0 left , 1 right in X-Axis in normalized Viewport;
+    public float spawnHeight = default; // 1 top of the screen in normalized Viewport;
     public int winCondition = default;
     public int lossCondition = default;
 
     [HideInInspector] public bool isUsed = default;
-    //public BaseLevelMaster levelPrefab;
-    //[HideInInspector] public bool isInstantiated = default;
 }

@@ -19,7 +19,7 @@ public class PlayerInputManager : MonoBehaviour ,IPlayerInputManager
     private void Start()
     {
         BlockSpawner = GetComponent<IBlockSpawner>();
-        Vector3 pos = Camera.main.ViewportToWorldPoint(new Vector3(UnityEngine.Random.Range(0.3f, 0.6f), 0.8f, 0));
+        Vector3 pos = Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0.3f, 0.6f), 0.8f, 0));
 
         Debug.Log("Top Screen Position: " + pos);
     }

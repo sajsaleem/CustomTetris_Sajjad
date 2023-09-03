@@ -15,6 +15,8 @@ MonoBehaviour:
   level:
     surfaceDimensions: {x: 10, y: 5, z: 1}
     surfacePosition: {x: 0, y: 2, z: 0}
+    horizontalSpawnArea: {x: 0.3, y: 0.6}
+    spawnHeight: 0.9
     winCondition: 40
     lossCondition: 5
     isUsed: 1

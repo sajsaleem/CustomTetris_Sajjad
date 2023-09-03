@@ -38,5 +38,17 @@ public static class CalculationsStaticClass
 
         return posY + (_transform.localScale.y / 2);
     }
+
+    public static float GetVerticalViewportToWorldPoint(float value)
+    {
+        Vector3 pos = Camera.main.ViewportToWorldPoint(new Vector3(0, value, 0));
+        return pos.y;
+    }
+
+    public static float GetHorizontalViewportToWorldPoint(float value)
+    {
+        Vector3 pos = Camera.main.ViewportToWorldPoint(new Vector3(value, 0, 0));
+        return pos.x;
+    }
 }
  

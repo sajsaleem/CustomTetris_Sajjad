@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayersSpawner : MonoBehaviour ,IPlayersSpawner
 {
     [SerializeField] private List<PlayerType> players;
-    [SerializeField] private GameObject player1;
 
     public List<PlayerType> PlayerEnvironments { get => players; }
     public List<PlayerType> InstantiatedPlayers { get; private set; } = new List<PlayerType>();
@@ -47,7 +46,5 @@ public class PlayersSpawner : MonoBehaviour ,IPlayersSpawner
                 break;
             }
         }
-
-        //GameObject newObject = Instantiate(player1);
     }
 }

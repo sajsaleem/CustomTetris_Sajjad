@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 
-public class BlockSpawner : MonoBehaviour
+public class BlockSpawner : MonoBehaviour,IBlockSpawner
 {
     private float leftPositionX , RightPositionX;
 
@@ -12,7 +12,10 @@ public class BlockSpawner : MonoBehaviour
 
     private IPlayerProgressTracker playerProgressTracker;
 
-    BasePieceMovementHandler newPiece;
+
+    //private BaseBlockMovementHandler newPiece;
+
+    public BaseBlockMovementHandler NewBlock { get; private set; } = default;
 
     // Start is called before the first frame update
     void Start()
@@ -29,11 +32,11 @@ public class BlockSpawner : MonoBehaviour
         if (PoolIsNull())
             return;
 
-        newPiece = Managers.PiecesObjectPooler.Pool.Get();
-        newPiece.gameObject.layer = (int)unityLayer;
+        NewBlock = Managers.PiecesObjectPooler.Pool.Get();
+        NewBlock.gameObject.layer = (int)unityLayer;
         float randomXPosition = Random.Range(leftPositionX, RightPositionX);
-        newPiece.transform.position = new Vector3(randomXPosition, blockSpawner.position.y, newPiece.transform.position.z);
-        newPiece.Initialize(playerProgressTracker);
+        NewBlock.transform.position = new Vector3(randomXPosition, blockSpawner.position.y, NewBlock.transform.position.z);
+        NewBlock.Initialize(playerProgressTracker);
     }
 
     private bool PoolIsNull()
@@ -51,7 +54,7 @@ public class BlockSpawner : MonoBehaviour
         while (Managers.GameManager.GameState == GameStates.PlayState)
         {
             SpawnPiece();
-            yield return new WaitUntil(() => newPiece.IsPlaced);
+            yield return new WaitUntil(() => NewBlock.IsPlaced);
         }
     }
 

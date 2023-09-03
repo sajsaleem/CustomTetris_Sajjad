@@ -6,12 +6,23 @@ public class PlayerInputManager : MonoBehaviour ,IPlayerInputManager
 {
     [SerializeField] private float tapInterval = default;
     [SerializeField] private bool isTouchActive = default;
+
     public float TapInterval { get => tapInterval; }
     public bool IsTouchActive { get => isTouchActive; }
+    public IBlockSpawner BlockSpawner { get; private set; } = default;
+
 
     private Vector3 startPressPosition;
     private Vector3 endPressPosition;
     private float touchPhaseStart = default;
+
+    private void Start()
+    {
+        BlockSpawner = GetComponent<IBlockSpawner>();
+        Vector3 pos = Camera.main.ViewportToWorldPoint(new Vector3(UnityEngine.Random.Range(0.3f, 0.6f), 0.8f, 0));
+
+        Debug.Log("Top Screen Position: " + pos);
+    }
 
     void Update()
     {
@@ -117,9 +128,7 @@ public class PlayerInputManager : MonoBehaviour ,IPlayerInputManager
 
     private void MoveObject(float moveAmount)
     {
-        if (Managers.PiecesObjectPooler.ActivePiece != null)
-        {
-            Managers.PiecesObjectPooler.ActivePiece.MovePieceSideWays(moveAmount);
-        }
+        if (BlockSpawner != null)
+            BlockSpawner.NewBlock.MovePieceSideWays(moveAmount);
     }
 }

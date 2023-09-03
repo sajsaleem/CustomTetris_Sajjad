@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public interface IPiecesObjectPooler
+public interface IBlocksObjectPooler
 {
     int DefaultCapacity { get; }
     int MaxCapacity { get; }
-    BasePieceMovementHandler ActivePiece { get; }
-    IObjectPool<BasePieceMovementHandler> Pool { get; }
-    BasePieceMovementHandler CreatePooledItem();
-    void OnReturnedToPool(BasePieceMovementHandler piece);
-    void OnTakeFromPool(BasePieceMovementHandler piece);
-    void OnDestroyPoolObject(BasePieceMovementHandler piece);
-    void UpdateActivePieceReference(BasePieceMovementHandler piece);
+    BaseBlockMovementHandler ActivePiece { get; }
+    IObjectPool<BaseBlockMovementHandler> Pool { get; }
+    BaseBlockMovementHandler CreatePooledItem();
+    void OnReturnedToPool(BaseBlockMovementHandler piece);
+    void OnTakeFromPool(BaseBlockMovementHandler piece);
+    void OnDestroyPoolObject(BaseBlockMovementHandler piece);
+    void UpdateActivePieceReference(BaseBlockMovementHandler piece);
 }

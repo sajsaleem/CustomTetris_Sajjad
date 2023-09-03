@@ -8,6 +8,8 @@ public interface IPlayerInputManager
     float TapInterval { get; }
     bool IsTouchActive { get; }
 
+    IBlockSpawner BlockSpawner { get; }
+
     void MyUpdate();
     void HandleMouseInput();
     void HandleTouchInput();

@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class PlayerPieceReturnToPool : BaseReturnToPool
+public class PlayerBlockReturnToPool : BaseReturnToPool
 {
     //ObjectPool<BasePieceMovementHandler> movementHandlerPool;
 
-    private BasePieceMovementHandler pieceMovementHandler;
+    private BaseBlockMovementHandler pieceMovementHandler;
 
     private Vector3 screenBounds;
 
     private void Start()
     {
         screenBounds = CalculationsStaticClass.GetScreenBounds();
-        pieceMovementHandler = GetComponent<BasePieceMovementHandler>();
+        pieceMovementHandler = GetComponent<BaseBlockMovementHandler>();
         Debug.Log("ScreenBoundY: " + -screenBounds.y);
     }
 

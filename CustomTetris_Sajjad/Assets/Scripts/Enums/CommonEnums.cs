@@ -1,4 +1,4 @@
-public enum PieceState
+public enum BlockState
 {
     Falling = 0,
     FreeFall = 1,

@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tapInterval: 0.2
-  isTouchActive: 0
+  isTouchActive: 1
 --- !u!1001 &237510187241906363
 PrefabInstance:
   m_ObjectHideFlags: 0

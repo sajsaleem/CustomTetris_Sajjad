@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class Managers : MonoBehaviour
 {
-    private static IPiecesObjectPooler piecesObjectPooler;
+    private static IBlocksObjectPooler blockObjectsPooler;
     private static IGameManager gameManager;
     private static ILevelMaster levelMaster;
     private static IPlayersSpawner playersSpawner;
 
 
-    public static IPiecesObjectPooler PiecesObjectPooler
+    public static IBlocksObjectPooler PiecesObjectPooler
     {
         get
         {
-            if (piecesObjectPooler == null)
-                return NullPiecesObjectPooler.Instance;
+            if (blockObjectsPooler == null)
+                return NullBlocksObjectPooler.Instance;
 
-            return piecesObjectPooler;
+            return blockObjectsPooler;
         }
     }
 
@@ -60,7 +60,7 @@ public class Managers : MonoBehaviour
 
     private void Awake()
     {
-        piecesObjectPooler = GetComponent<IPiecesObjectPooler>();
+        blockObjectsPooler = GetComponent<IBlocksObjectPooler>();
         gameManager = GetComponent<IGameManager>();
         levelMaster = GetComponent<ILevelMaster>();
         playersSpawner = GetComponent<IPlayersSpawner>();

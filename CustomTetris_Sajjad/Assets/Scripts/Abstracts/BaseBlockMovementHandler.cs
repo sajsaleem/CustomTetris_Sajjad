@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementHandler
+public abstract class BaseBlockMovementHandler : MonoBehaviour,  IBlockMovementHandler
 {
     #region serialized fields
-    [SerializeField] private PieceState _pieceState;
+    [SerializeField] private BlockState _blockState;
     [SerializeField] private Transform rotationPivot;
     [SerializeField] private BasePieceSettings pieceSettings;
     #endregion
@@ -28,7 +28,7 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
     public bool IsMoveable { get; private set; } = default;
     public bool MyRigidBody => _myRigidBody;
     public bool IsActive => gameObject.activeInHierarchy;
-    public PieceState PieceState => _pieceState;
+    public BlockState BlockState => _blockState;
     public Vector3 LocalScale => transform.localScale;
     public Vector3 Position => transform.position;
     #endregion
@@ -44,7 +44,7 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
         IsPlaced = false;
         IsMoveable = true;
         rotatePiece = false;
-        UpdatePieceState(PieceState.Falling);
+        UpdatePieceState(BlockState.Falling);
         placedheight = 0;
         playerProgressTracker = _playerProgressTracker;
     }
@@ -118,7 +118,7 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
     {
         fallSpeed = pieceSettings.CaclulateFreeFallSpeed();
         IsMoveable = false;
-        UpdatePieceState(PieceState.FreeFall);
+        UpdatePieceState(BlockState.FreeFall);
     }
 
     public virtual void Reset()
@@ -168,18 +168,18 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
 
         if(_myRigidBody.velocity.magnitude <= 0.005f)
         {
-            UpdatePieceState(PieceState.InStableState);
+            UpdatePieceState(BlockState.InStableState);
         }
         else
         {
-            UpdatePieceState(PieceState.Falling);
+            UpdatePieceState(BlockState.Falling);
         }
 
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        IPieceMovementHandler ipieceMovmentHandler = collision.gameObject.GetComponent<IPieceMovementHandler>();
+        IBlockMovementHandler ipieceMovmentHandler = collision.gameObject.GetComponent<IBlockMovementHandler>();
 
         if (collision.gameObject.CompareTag("surface") || (ipieceMovmentHandler != null && ipieceMovmentHandler.IsPlaced))
         {
@@ -187,19 +187,19 @@ public abstract class BasePieceMovementHandler : MonoBehaviour,  IPieceMovementH
             IsMoveable = false;
             _constantForce.enabled = true;
             //_myRigidBody.useGravity = true;
-            UpdatePieceState(PieceState.IsPlaced);
+            UpdatePieceState(BlockState.IsPlaced);
         }
     }
 
-    private void UpdatePieceState(PieceState pieceState)
+    private void UpdatePieceState(BlockState blockState)
     {
-        if (_pieceState != pieceState)
-            _pieceState = pieceState;
+        if (_blockState != blockState)
+            _blockState = blockState;
     }
 
     private void AddToTowerHeight()
     {
-        if (placedheight <= 0 && _pieceState == PieceState.InStableState && !isAddedToTower)
+        if (placedheight <= 0 && _blockState == BlockState.InStableState && !isAddedToTower)
         {
             //Transform heighestChild = CalculationsStaticClass.GetHeighestTransformInChildren(rotationPivot);
             //placedheight = CalculationsStaticClass.GetObjectHeight(heighestChild);

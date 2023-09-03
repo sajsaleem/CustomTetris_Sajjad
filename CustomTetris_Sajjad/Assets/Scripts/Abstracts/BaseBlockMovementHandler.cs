@@ -54,8 +54,6 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour,  IBlockMovementH
         targetRotation = pieceSettings.pieceData.targetRotation;
         rotationSpeed = pieceSettings.pieceData.rotationSpeed;
         fallSpeed = pieceSettings.CalculateNormalFallSpeed();
-        //_gravity = pieceSettings.pieceData.gravity;
-
     }
 
     public virtual void RotatePiece()
@@ -201,8 +199,6 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour,  IBlockMovementH
     {
         if (placedheight <= 0 && _blockState == BlockState.InStableState && !isAddedToTower)
         {
-            //Transform heighestChild = CalculationsStaticClass.GetHeighestTransformInChildren(rotationPivot);
-            //placedheight = CalculationsStaticClass.GetObjectHeight(heighestChild);
             playerProgressTracker.TowerManager.AddBlock(rotationPivot);
             isAddedToTower = true;
         }

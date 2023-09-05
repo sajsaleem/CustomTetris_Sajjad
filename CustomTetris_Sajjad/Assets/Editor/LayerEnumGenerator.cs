@@ -15,8 +15,6 @@ public class LayerEnumGenerator : Editor
             if (!string.IsNullOrEmpty(layerName))
             {
                 //scriptText += $"    {layerName} = {i},\n";
-                Debug.Log("Name: " + string.Join("_", layerName.Split(' ')));
-
                 scriptText += $"    {string.Join("_", layerName.Split(' '))} = {i},\n";
             }
         }

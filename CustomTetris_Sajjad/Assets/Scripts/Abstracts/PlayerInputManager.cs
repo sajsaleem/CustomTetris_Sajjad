@@ -20,8 +20,6 @@ public class PlayerInputManager : MonoBehaviour ,IPlayerInputManager
     {
         BlockSpawner = GetComponent<IBlockSpawner>();
         Vector3 pos = Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0.3f, 0.6f), 0.8f, 0));
-
-        Debug.Log("Top Screen Position: " + pos);
     }
 
     void Update()
@@ -115,8 +113,7 @@ public class PlayerInputManager : MonoBehaviour ,IPlayerInputManager
 
         if ((Time.time - touchPhaseStart < tapInterval) && swipeDirection.magnitude <= 0.3)
         {
-            if (Managers.PiecesObjectPooler.ActivePiece != null)
-                Managers.PiecesObjectPooler.ActivePiece.RotatePiece();
+            RotateObject();
         }
 
         //swipe down
@@ -130,5 +127,11 @@ public class PlayerInputManager : MonoBehaviour ,IPlayerInputManager
     {
         if (BlockSpawner != null)
             BlockSpawner.NewBlock.MovePieceSideWays(moveAmount);
+    }
+
+    private void RotateObject()
+    {
+        if (BlockSpawner != null)
+            BlockSpawner.NewBlock.RotatePiece();
     }
 }

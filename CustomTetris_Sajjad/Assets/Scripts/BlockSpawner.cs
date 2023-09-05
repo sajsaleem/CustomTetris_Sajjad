@@ -38,7 +38,14 @@ public class BlockSpawner : MonoBehaviour,IBlockSpawner
             return;
 
         NewBlock = Managers.PiecesObjectPooler.Pool.Get();
-        NewBlock.gameObject.layer = (int)unityLayer;
+        Transform[] children = NewBlock.GetComponentsInChildren<Transform>();
+        
+        for(int i =0; i < children.Length; i++)
+        {
+            children[i].gameObject.layer = (int)unityLayer;
+        }
+
+        //NewBlock.gameObject.layer = (int)unityLayer;
         float randomXPosition = Random.Range(leftPositionX, rightPositionX);
         NewBlock.transform.position = new Vector3(randomXPosition, spawnHeight, NewBlock.transform.position.z);
         NewBlock.Initialize(playerProgressTracker);

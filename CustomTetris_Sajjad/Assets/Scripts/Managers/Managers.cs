@@ -9,6 +9,7 @@ public class Managers : MonoBehaviour
     private static ILevelMaster levelMaster;
     private static IPlayersSpawner playersSpawner;
     private static IMenuController menuController;
+    private static IResultManager resultManager;
 
 
     public static IBlocksObjectPooler PiecesObjectPooler
@@ -68,6 +69,17 @@ public class Managers : MonoBehaviour
         }
     }
 
+    public static IResultManager ResultManager
+    {
+        get
+        {
+            if (resultManager == null)
+                return NullResultManager.Instance;
+
+            return resultManager;
+        }
+    }
+
 
 
     private void Awake()
@@ -76,6 +88,7 @@ public class Managers : MonoBehaviour
         gameManager = GetComponent<IGameManager>();
         levelMaster = GetComponent<ILevelMaster>();
         playersSpawner = GetComponent<IPlayersSpawner>();
-        menuController = GetComponent<MenuController>();
+        menuController = GetComponent<IMenuController>();
+        resultManager = GetComponent<IResultManager>();
     }
 }

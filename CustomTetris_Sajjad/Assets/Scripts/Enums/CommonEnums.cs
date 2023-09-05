@@ -32,5 +32,5 @@ public enum MenuType
     StartMenu = 0,
     GameMenu = 1,
     Pause = 2,
-    GameOveer = 3
+    GameOver = 3
 }

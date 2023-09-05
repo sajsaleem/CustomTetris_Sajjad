@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Ui;
+using TMPro;
 public class GameOver : BaseMenu
 {
+    [SerializeField] private TextMeshProUGUI resultMsg;
+
     public override void Init()
     {
         base.Init();
@@ -13,6 +16,7 @@ public class GameOver : BaseMenu
     public void OnReplayCallback()
     {
         Managers.MenuController.DisableUi(MenuType);
+        Managers.ResultManager.Reset();
         Time.timeScale = 1;
 
     }
@@ -34,11 +38,26 @@ public class GameOver : BaseMenu
         base.MyEnable();
 
         SetSelectablesActiveStatus(true);
+        HandleResultMsg();
         Time.timeScale = 0;
     }
 
     public override void Reset()
     {
         throw new System.NotImplementedException();
+    }
+
+    private void HandleResultMsg()
+    {
+        string winner = Managers.ResultManager.WinnerName;
+
+        if (winner == PlayerTags.Player0.ToString())
+        {
+            resultMsg.text = "You Won !!!";
+        }
+        else
+        {
+            resultMsg.text = "You were not able to win :(";
+        }
     }
 }

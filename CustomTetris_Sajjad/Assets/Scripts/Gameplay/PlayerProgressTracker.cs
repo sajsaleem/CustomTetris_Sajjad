@@ -15,6 +15,7 @@ public class PlayerProgressTracker : MonoBehaviour,IPlayerProgressTracker
     private void Start()
     {
         TowerManager = GetComponent<ITowerManager>();
+        playerType = GetComponent<IPlayerType>();
         winCondition = Managers.LevelMaster.WinCondition();
         lossCondition = Managers.LevelMaster.LossCondition();
     }
@@ -24,11 +25,13 @@ public class PlayerProgressTracker : MonoBehaviour,IPlayerProgressTracker
         if(TowerManager.TowerHeight >= winCondition)
         {
             // Do Some Action;
+            Managers.ResultManager.UpdateWinner(playerType.PlayerTag.ToString());
         }
 
         if(PiecesLost >= lossCondition)
         {
             // Do Loss Action here;
+            Managers.ResultManager.UpdateLooser(playerType.PlayerTag.ToString());
         }
 
     }

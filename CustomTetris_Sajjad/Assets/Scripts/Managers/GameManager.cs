@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour, IGameManager
     public void EndPlay()
     {
         Debug.Log("Result Is result screen");
+        Managers.MenuController.ActivateUi(MenuType.GameOver);
+        Managers.MenuController.DisableUi(MenuType.GameMenu);
     }
 
     public void ResetAll()
@@ -41,5 +43,8 @@ public class GameManager : MonoBehaviour, IGameManager
 
         // Disable All players spawned;
         Managers.PlayersSpawner.Reset();
+
+        Managers.ResultManager.Reset();
+
     }
 }

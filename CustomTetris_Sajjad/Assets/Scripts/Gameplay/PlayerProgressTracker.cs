@@ -10,6 +10,7 @@ public class PlayerProgressTracker : MonoBehaviour,IPlayerProgressTracker
 
     private int winCondition = default;
     private int lossCondition = default;
+    private IPlayerType playerType;
 
     private void Start()
     {

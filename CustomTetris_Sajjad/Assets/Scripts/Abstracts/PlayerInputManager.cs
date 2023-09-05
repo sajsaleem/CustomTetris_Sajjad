@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerInputManager : MonoBehaviour ,IPlayerInputManager
 {
@@ -43,7 +44,7 @@ public class PlayerInputManager : MonoBehaviour ,IPlayerInputManager
 
     public void HandleMouseInput()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             ScreenTouchBegan(Input.mousePosition);
         }
@@ -65,6 +66,9 @@ public class PlayerInputManager : MonoBehaviour ,IPlayerInputManager
     {
         foreach (Touch touch in Input.touches)
         {
+            if (Input.touchCount > 0 && PointerOverUi(touch.fingerId))
+                return;
+
             if (touch.phase == TouchPhase.Began)
             {
                 startPressPosition = touch.position;
@@ -133,5 +137,10 @@ public class PlayerInputManager : MonoBehaviour ,IPlayerInputManager
     {
         if (BlockSpawner != null)
             BlockSpawner.NewBlock.RotatePiece();
+    }
+
+    private bool PointerOverUi(int touchid)
+    {
+        return EventSystem.current.IsPointerOverGameObject(touchid);
     }
 }

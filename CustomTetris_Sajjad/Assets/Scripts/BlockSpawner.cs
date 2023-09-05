@@ -8,6 +8,8 @@ public class BlockSpawner : MonoBehaviour,IBlockSpawner
     private float leftPositionX , rightPositionX;
     private float spawnHeight = default;
 
+    private GameObject blocksParent;
+
     private Vector3 worldPosition;
 
     [SerializeField] private UnityLayers unityLayer;
@@ -23,6 +25,8 @@ public class BlockSpawner : MonoBehaviour,IBlockSpawner
     // Start is called before the first frame update
     void Start()
     {
+        blocksParent = new GameObject("BlocksParent");
+        blocksParent.transform.position = Vector3.zero;
         Vector2 horizontalSpawnArea = Managers.LevelMaster.GetLevel().horizontalSpawnArea;
         leftPositionX = CalculationsStaticClass.GetHorizontalViewportToWorldPoint(horizontalSpawnArea.x);
         rightPositionX = CalculationsStaticClass.GetHorizontalViewportToWorldPoint(horizontalSpawnArea.y);
@@ -38,6 +42,7 @@ public class BlockSpawner : MonoBehaviour,IBlockSpawner
             return;
 
         NewBlock = Managers.PiecesObjectPooler.Pool.Get();
+        NewBlock.transform.SetParent(blocksParent.transform);
         Transform[] children = NewBlock.GetComponentsInChildren<Transform>();
         
         for(int i =0; i < children.Length; i++)
@@ -45,7 +50,6 @@ public class BlockSpawner : MonoBehaviour,IBlockSpawner
             children[i].gameObject.layer = (int)unityLayer;
         }
 
-        //NewBlock.gameObject.layer = (int)unityLayer;
         float randomXPosition = Random.Range(leftPositionX, rightPositionX);
         NewBlock.transform.position = new Vector3(randomXPosition, spawnHeight, NewBlock.transform.position.z);
         NewBlock.Initialize(playerProgressTracker);

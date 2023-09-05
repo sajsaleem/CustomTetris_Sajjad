@@ -30,4 +30,9 @@ public class NullGameManager : IGameManager
     {
 
     }
+
+    public void ResetAll()
+    {
+
+    }
 }

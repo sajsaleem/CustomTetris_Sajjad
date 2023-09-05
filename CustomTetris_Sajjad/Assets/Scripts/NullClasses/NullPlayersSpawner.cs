@@ -24,4 +24,9 @@ public class NullPlayersSpawner : IPlayersSpawner
     {
 
     }
+
+    public void Reset()
+    {
+
+    }
 }

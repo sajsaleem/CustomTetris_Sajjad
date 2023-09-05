@@ -17,6 +17,14 @@ public class NullBlocksObjectPooler: IBlocksObjectPooler
         }
     }
 
+    public GameObject BlocksParent
+    {
+        get
+        {
+            return new GameObject("BlocksParent");
+        }
+    }
+
     public int DefaultCapacity { get; private set; } = default;
     public int MaxCapacity { get; private set; } = default;
     public BaseBlockMovementHandler ActivePiece { get; private set; } = default;
@@ -25,6 +33,11 @@ public class NullBlocksObjectPooler: IBlocksObjectPooler
     public BaseBlockMovementHandler CreatePooledItem()
     {
         return Object.Instantiate(new GameObject("NullPiecesObjectPooler").AddComponent<BaseBlockMovementHandler>());
+    }
+
+    public void Initialize()
+    {
+
     }
 
     public void OnReturnedToPool(BaseBlockMovementHandler piece)
@@ -43,6 +56,16 @@ public class NullBlocksObjectPooler: IBlocksObjectPooler
     }
 
     public void UpdateActivePieceReference(BaseBlockMovementHandler piece)
+    {
+
+    }
+
+    public void SetParent(Transform childBlock)
+    {
+
+    }
+
+    public void ReturnAllBlocksToPool()
     {
 
     }

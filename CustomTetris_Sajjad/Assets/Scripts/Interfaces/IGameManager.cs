@@ -8,4 +8,5 @@ public interface IGameManager
     GameModeType ActiveGameMode { get; }
     void StartPlay(GameModeType _gameModeType);
     void EndPlay();
+    void ResetAll();
 }

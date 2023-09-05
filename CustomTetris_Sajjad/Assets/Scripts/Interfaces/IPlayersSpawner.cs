@@ -8,4 +8,5 @@ public interface IPlayersSpawner
     List<PlayerType> InstantiatedPlayers { get; }
 
     void SpawnPlayers(GameModeType _gameModeType);
+    void Reset();
 }

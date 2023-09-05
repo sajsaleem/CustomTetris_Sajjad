@@ -26,3 +26,11 @@ public enum PlayerTags
     Player0 = 0,
     Player1 = 1
 }
+
+public enum MenuType
+{
+    StartMenu = 0,
+    GameMenu = 1,
+    Pause = 2,
+    GameOveer = 3
+}

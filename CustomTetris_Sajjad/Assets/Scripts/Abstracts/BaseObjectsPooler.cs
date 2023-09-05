@@ -13,7 +13,7 @@ public abstract class BaseObjectsPooler : MonoBehaviour, IBlocksObjectPooler
 
     #region Private Fields
     private IObjectPool<BaseBlockMovementHandler> _pool;
-    private BaseBlockMovementHandler activePiece = default;
+    private GameObject blocksParent;
     #endregion
 
     #region Properties
@@ -24,32 +24,35 @@ public abstract class BaseObjectsPooler : MonoBehaviour, IBlocksObjectPooler
         {
             if (_pool == null)
             {
-                _pool = new ObjectPool<BaseBlockMovementHandler>(CreatePooledItem, OnTakeFromPool, OnReturnedToPool, OnDestroyPoolObject, false,defaultCapacity,maxCapacity);
+                _pool = new ObjectPool<BaseBlockMovementHandler>(CreatePooledItem, OnTakeFromPool, OnReturnedToPool, OnDestroyPoolObject, false, defaultCapacity, maxCapacity);
             }
 
             return _pool;
         }
     }
 
-    public int DefaultCapacity => defaultCapacity;
-    public int MaxCapacity => maxCapacity;
-    public BaseBlockMovementHandler ActivePiece => activePiece;
+    public int DefaultCapacity { get => defaultCapacity; }
+    public int MaxCapacity { get => maxCapacity;}
+    public GameObject BlocksParent { get => blocksParent; }
     #endregion
 
     #region Virtual Functions
+
+    public virtual void Initialize()
+    {
+        blocksParent = new GameObject("BlocksParent");
+    }
 
     public virtual BaseBlockMovementHandler CreatePooledItem()
     {
         BaseBlockMovementHandler piecePrefab = blockPrefabs[Random.Range(0, blockPrefabs.Count - 1)];
         var instantiatedObject = Instantiate(piecePrefab);
-        UpdateActivePieceReference(instantiatedObject);
         return instantiatedObject;
     }
 
     public virtual void OnTakeFromPool(BaseBlockMovementHandler block)
     {
         block.gameObject.SetActive(true);
-        UpdateActivePieceReference(block);
     }
 
     public virtual void OnReturnedToPool(BaseBlockMovementHandler piece)
@@ -62,10 +65,22 @@ public abstract class BaseObjectsPooler : MonoBehaviour, IBlocksObjectPooler
         Destroy(piece.gameObject);
     }
 
-    public virtual void UpdateActivePieceReference(BaseBlockMovementHandler block)
+    public virtual void SetParent(Transform childBlock)
     {
-        this.activePiece = block;
+        childBlock.transform.SetParent(BlocksParent.transform);
     }
+
+    public virtual void ReturnAllBlocksToPool()
+    {
+        BaseBlockMovementHandler[] childBlocks = BlocksParent.GetComponentsInChildren<BaseBlockMovementHandler>();
+
+        for(int i = 0; i < childBlocks.Length; i++)
+        {
+            Pool.Release(childBlocks[i]);
+        }
+    }
+
+
 
     #endregion
 }

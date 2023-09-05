@@ -27,7 +27,7 @@ public class PlayersSpawner : MonoBehaviour ,IPlayersSpawner
     {
         for (int i = 0; i < InstantiatedPlayers.Count; i++)
         {
-            if (InstantiatedPlayers[i].PlayerTag == playerTag)
+            if ((int)InstantiatedPlayers[i].PlayerTag == (int)playerTag)
             {
                 InstantiatedPlayers[i].gameObject.SetActive(true);
                 return;
@@ -47,4 +47,15 @@ public class PlayersSpawner : MonoBehaviour ,IPlayersSpawner
             }
         }
     }
+
+    public void Reset()
+    {
+        for(int i = 0; i < InstantiatedPlayers.Count; i++)
+        {
+            if (InstantiatedPlayers[i].gameObject.activeInHierarchy)
+                InstantiatedPlayers[i].gameObject.SetActive(false);
+        }
+    }
+
+
 }

@@ -393,9 +393,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdf5281fd60dcb4e889e12a7b850701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pieceState: 0
+  _blockState: 0
   rotationPivot: {fileID: 5714726841983717075}
-  pieceSettings: {fileID: 11400000, guid: 830b3de1b2cd311499e008f1e10c032b, type: 2}
+  blockSettings: {fileID: 11400000, guid: 830b3de1b2cd311499e008f1e10c032b, type: 2}
 --- !u!114 &5557167703492505154
 MonoBehaviour:
   m_ObjectHideFlags: 0

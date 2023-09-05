@@ -1,36 +1,95 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEditor;
 using System.IO;
 using System.Linq;
-using System;
 
 public class LevelsDataModifier : ScriptableWizard
 {
-    private string directoryPath = Application.dataPath + "/ScriptableObjects/LevelSettings";
-    private string selectedFileName;
-    private List<string> fileNames = default;
+    [Dropdown("fileNamesList")]
+    public string ScriptableAsset;
 
-    [Dropdown("FilesList")]
-    public string fileName;
+    #region Exposed Variables
+    [Tooltip("Updates the Scaling of surface in three-dimensions")]
+    [SerializeField] private Vector3 surfaceDimensions = default;
+    [SerializeField] private Vector3 surfacePosition = default;
+    [SerializeField] private Vector2 horizontalSpawnArea; // 0 left , 1 right in X-Axis in normalized Viewport;
+    [SerializeField] private float spawnHeight = default; // 1 top of the screen in normalized Viewport;
+    [SerializeField] private int winCondition = default;
+    [SerializeField] private int lossCondition = default;
+    #endregion
+
+    #region private Variables
+    private string directoryPath = "Assets/ScriptableObjects/LevelSettings/";
+    private string selectedFileName;
+    private List<string> fileNamesList = default;
+    private LevelData levelData = new LevelData();
+    private LevelsDataModifier instance;
+    private BaseLevelSettings levelSettings = null;
+
+    private Vector3 originalSurfaceDimensions = default;
+    private Vector3 originalSurfacePosition = default;
+    private Vector2 originalHorizontalSpawnArea = default;
+    private float originalSpawnHeight = default;
+    private int originalWinCondition = default;
+    private int originalLossCondition = default;
+    #endregion
 
     [MenuItem("Tools/Levels Data Editor")]
     static void CreateWizard()
     {
-        DisplayWizard<LevelsDataModifier>("File Dropdown Wizard", "Load");
-        //DisplayWizard<LevelsDataModifier>("File Dropdown Wizard", "Update");
+        LevelsDataModifier wizard = DisplayWizard<LevelsDataModifier>("Level Data Modifier", "Close" , "Update");
+        wizard.instance = wizard;
     }
 
     private void OnWizardCreate()
     {
-        
+
     }
 
     private void OnEnable()
     {
         RefreshFileNames();
+        ScriptableAsset = fileNamesList[0];
+        LoadScriptableObject();
+    }
+
+    private void OnWizardUpdate()
+    {
+
+        if (levelSettings == null)
+            return;
+
+        if (ScriptableAsset != levelSettings.name +".asset")
+        {
+            LoadScriptableObject();
+            return;
+        }
+
+        if (instance != null && AnyValueUpdated())
+        {
+            EditorUtility.SetDirty(instance);
+        }
+
+        helpString = "Select LevelSetting from dropdown, update values, press update to update the scriptable object or Close to clost the Wizard";
+    }
+
+    private bool AnyValueUpdated()
+    {
+        if (surfaceDimensions != originalSurfaceDimensions)
+            return true;
+        if (surfacePosition != originalSurfacePosition)
+            return true;
+        if (winCondition != originalWinCondition)
+            return true;
+        if (lossCondition != originalLossCondition)
+            return true;
+        if (spawnHeight != originalSpawnHeight)
+            return true;
+        if (horizontalSpawnArea != originalHorizontalSpawnArea)
+            return true;
+
+        return false;
     }
 
     // This method updates the list of file names based on the selected directory path.
@@ -38,44 +97,65 @@ public class LevelsDataModifier : ScriptableWizard
     {
         if (Directory.Exists(directoryPath))
         {
-            fileNames = Directory.GetFiles(directoryPath)
-                                 .Select(Path.GetFileName)
-                                 .ToList();
+            fileNamesList = Directory.GetFiles(directoryPath)
+                                .Select(Path.GetFileName).Where(s => Path.GetExtension(s) == ".asset")
+                                .ToList();
         }
         else
         {
-           /* fileNames = new string[0];*/ // No files found if the directory doesn't exist.
+            Debug.Log("No assets found");
+            /* fileNames = new string[0];*/ // No files found if the directory doesn't exist.
         }
+    }
+
+    void LoadScriptableObject()
+    {
+        AssetDatabase.Refresh();
+        string path = Path.Combine(directoryPath + ScriptableAsset);
+        levelSettings = AssetDatabase.LoadAssetAtPath<BaseLevelSettings>(path);
+        InitializeVariables();
+
+    }
+
+    private void InitializeVariables()
+    {
+        if (levelSettings != null)
+        {
+            originalSurfaceDimensions = levelSettings.level.surfaceDimensions;
+            originalSurfacePosition = levelSettings.level.surfacePosition;
+            originalWinCondition = levelSettings.level.winCondition;
+            originalLossCondition = levelSettings.level.lossCondition;
+            originalSpawnHeight = levelSettings.level.spawnHeight;
+            originalHorizontalSpawnArea = levelSettings.level.horizontalSpawnArea;
+
+            surfaceDimensions = originalSurfaceDimensions;
+            surfacePosition = originalSurfacePosition;
+            winCondition = originalWinCondition;
+            lossCondition = originalLossCondition;
+            spawnHeight = originalSpawnHeight;
+            horizontalSpawnArea = originalHorizontalSpawnArea;
+        }
+    }
+
+    private void UpdateLevelValues()
+    {
+        levelSettings.level.surfaceDimensions = surfaceDimensions;
+        levelSettings.level.surfacePosition = surfacePosition;
+        levelSettings.level.winCondition = winCondition;
+        levelSettings.level.lossCondition = lossCondition;
+        levelSettings.level.spawnHeight = spawnHeight;
+        levelSettings.level.horizontalSpawnArea = horizontalSpawnArea;
     }
 
     // Create a dropdown in the wizard for selecting the file.
     void OnWizardOtherButton()
     {
-        //int selectedFileIndex = EditorGUILayout.Popup("Select a File", GetSelectedFileIndex(), fileNames);
-
-        //if (selectedFileIndex >= 0 && selectedFileIndex < fileNames.Length)
-        //{
-        //    selectedFileName = fileNames[selectedFileIndex];
-        //}
-        //else
-        //{
-        //    selectedFileName = null;
-        //}
-    }
-
-    // Helper method to get the index of the selected file in the fileNames array.
-    private int GetSelectedFileIndex()
-    {
-        if (!string.IsNullOrEmpty(selectedFileName))
+        if (levelSettings != null)
         {
-            for (int i = 0; i < fileNames.Count; i++)
-            {
-                if (fileNames[i] == selectedFileName)
-                {
-                    return i;
-                }
-            }
+            UpdateLevelValues();
+            EditorUtility.SetDirty(levelSettings);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
         }
-        return -1; // Selected file not found in the array.
     }
 }

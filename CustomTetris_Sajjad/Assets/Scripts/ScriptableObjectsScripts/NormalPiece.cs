@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NormalPieceData" , menuName = ConstantsManager.MenuName.ScriptableObjects +"/NormalPieceData")]
-public class NormalPiece : BasePieceSettings
+public class NormalPiece : BaseBlockSettings
 {
     public override float CalculateNormalFallSpeed()
     {
-        return pieceData.normalFallSpeed * pieceData.gravity.y;
+        return blockData.normalFallSpeed * blockData.gravity.y;
     }
 
     public override float CaclulateFreeFallSpeed()
     {
-        return pieceData.freefallSpeed * pieceData.gravity.y;
+        return blockData.freefallSpeed * blockData.gravity.y;
     }
 }

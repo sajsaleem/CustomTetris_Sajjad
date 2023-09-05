@@ -7,7 +7,7 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour,  IBlockMovementH
     #region serialized fields
     [SerializeField] private BlockState _blockState;
     [SerializeField] private Transform rotationPivot;
-    [SerializeField] private BasePieceSettings pieceSettings;
+    [SerializeField] private BaseBlockSettings blockSettings;
     #endregion
 
     #region private fields
@@ -39,7 +39,7 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour,  IBlockMovementH
         _myRigidBody ??= GetComponent<Rigidbody>();
         _constantForce ??= GetComponent<ConstantForce>();
         _myRigidBody.freezeRotation = false;
-        _constantForce.force = pieceSettings.pieceData.gravity;
+        _constantForce.force = blockSettings.blockData.gravity;
         _constantForce.enabled = false;
         IsPlaced = false;
         IsMoveable = true;
@@ -51,9 +51,9 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour,  IBlockMovementH
 
     public virtual void MyEnable()
     {
-        targetRotation = pieceSettings.pieceData.targetRotation;
-        rotationSpeed = pieceSettings.pieceData.rotationSpeed;
-        fallSpeed = pieceSettings.CalculateNormalFallSpeed();
+        targetRotation = blockSettings.blockData.targetRotation;
+        rotationSpeed = blockSettings.blockData.rotationSpeed;
+        fallSpeed = blockSettings.CalculateNormalFallSpeed();
     }
 
     public virtual void RotatePiece()
@@ -114,7 +114,7 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour,  IBlockMovementH
 
     public virtual void FreeFallPiece()
     {
-        fallSpeed = pieceSettings.CaclulateFreeFallSpeed();
+        fallSpeed = blockSettings.CaclulateFreeFallSpeed();
         IsMoveable = false;
         UpdatePieceState(BlockState.FreeFall);
     }

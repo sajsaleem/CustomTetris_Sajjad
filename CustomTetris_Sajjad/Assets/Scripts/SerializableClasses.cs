@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class PieceData
+public class blockData
 {
     public float normalFallSpeed = default;
     public float freefallSpeed = default;

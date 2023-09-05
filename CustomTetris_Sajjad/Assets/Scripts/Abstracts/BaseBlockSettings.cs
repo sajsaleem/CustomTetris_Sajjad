@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BasePieceSettings : ScriptableObject
+public abstract class BaseBlockSettings : ScriptableObject
 {
-    public PieceData pieceData;
+    public blockData blockData;
 
     public abstract float CalculateNormalFallSpeed();
     public abstract float CaclulateFreeFallSpeed();

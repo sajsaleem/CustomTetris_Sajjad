@@ -22,6 +22,7 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour, IBlockMovementHa
     private float fallSpeed = default;
     private float placedheight = default;
     private float _gravity = default;
+    private float xHighlighterScale = default;
     private IPlayerProgressTracker playerProgressTracker;
     #endregion
 
@@ -53,8 +54,8 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour, IBlockMovementHa
         placedheight = 0;
         playerProgressTracker = _playerProgressTracker;
         placementHighlighter = highlighter;
-        float xScale = CalculationsStaticClass.GetChildrenScale(rotationPivot);
-        placementHighlighter.localScale = new Vector3(xScale, placementHighlighter.localScale.y, placementHighlighter.localScale.z);
+        xHighlighterScale = CalculationsStaticClass.GetChildrenScale(rotationPivot);
+        SetPlacementHighlighterXScale(xHighlighterScale);
     }
 
     public virtual void MyEnable()
@@ -62,9 +63,6 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour, IBlockMovementHa
         targetRotation = blockSettings.blockData.targetRotation;
         rotationSpeed = blockSettings.blockData.rotationSpeed;
         fallSpeed = blockSettings.CalculateNormalFallSpeed();
-
-
-
     }
 
     public virtual void RotatePiece()
@@ -103,14 +101,22 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour, IBlockMovementHa
     {
         if (rotatePiece)
         {
-            float rotateValue = Mathf.MoveTowardsAngle(rotationPivot.rotation.eulerAngles.z, targetRotation, rotationSpeed * Time.unscaledDeltaTime);
+            float rotateValue = Mathf.MoveTowardsAngle(
+                rotationPivot.rotation.eulerAngles.z,
+                targetRotation,
+                rotationSpeed * Time.unscaledDeltaTime);
+
             rotationPivot.rotation = Quaternion.Euler(0f, 0f, rotateValue);
 
             HandleRotationDisable(rotateValue);
         }
 
-        placementHighlighter.position = new Vector3(rotationPivot.position.x, placementHighlighter.position.y, placementHighlighter.position.z);
+        UpdatePlacementHighlighterPosition(new Vector3(
+            rotationPivot.position.x,
+            placementHighlighter.position.y,
+            placementHighlighter.position.z));
 
+        //placementHighlighter.position = new Vector3(rotationPivot.position.x, placementHighlighter.position.y, placementHighlighter.position.z);
     }
 
     public virtual void FreeFallPiece()
@@ -145,9 +151,8 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour, IBlockMovementHa
         if (Mathf.Approximately(rotateValue, targetRotation))
         {
             rotatePiece = false;
-            float xScale = CalculationsStaticClass.GetChildrenScale(rotationPivot);
-
-            placementHighlighter.localScale = new Vector3(xScale, placementHighlighter.localScale.y, placementHighlighter.localScale.z);
+            xHighlighterScale = CalculationsStaticClass.GetChildrenScale(rotationPivot);
+            SetPlacementHighlighterXScale(xHighlighterScale);
         }
     }
 
@@ -191,6 +196,16 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour, IBlockMovementHa
     {
         if (_blockState != blockState)
             _blockState = blockState;
+    }
+
+    private void SetPlacementHighlighterXScale(float value)
+    {
+        placementHighlighter.localScale = new Vector3(value, placementHighlighter.localScale.y, placementHighlighter.localScale.z);
+    }
+
+    private void UpdatePlacementHighlighterPosition(Vector3 newPosition)
+    {
+        placementHighlighter.position = newPosition;
     }
 
     private void AddToTowerHeight()

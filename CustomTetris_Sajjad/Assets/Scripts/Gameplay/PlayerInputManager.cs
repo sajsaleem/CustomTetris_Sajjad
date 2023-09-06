@@ -115,7 +115,7 @@ public class PlayerInputManager : MonoBehaviour ,IPlayerInputManager
 
         Vector3 swipeDirection = endPressPosition - startPressPosition;
 
-        if ((Time.time - touchPhaseStart < tapInterval) && swipeDirection.magnitude <= 0.3)
+        if ((Time.time - touchPhaseStart < tapInterval) && swipeDirection.magnitude <= 0.2)
         {
             RotateObject();
         }
@@ -125,6 +125,16 @@ public class PlayerInputManager : MonoBehaviour ,IPlayerInputManager
         //{
         //    Managers.PiecesObjectPooler.ActivePiece.FreeFallPiece();
         //}
+    }
+
+    private bool IsSwipeOnYAxis(Vector3 swipeDirection)
+    {
+        if(swipeDirection.y < -0.5f && swipeDirection.x > -0.2f && swipeDirection.x < 0.2f)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     private void MoveObject(float moveAmount)

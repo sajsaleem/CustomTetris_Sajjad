@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour, IGameManager
         Managers.MenuController.ActivateUi(MenuType.StartMenu);
         Managers.BlockObjectsPooler.Initialize();
         Managers.CameraMaster.Initialize();
+        ResetDebugPanel();
     }
 
     public void StartPlay(GameModeType _gameModeType)
@@ -58,5 +59,13 @@ public class GameManager : MonoBehaviour, IGameManager
     {
         await Task.Delay(1000);
         //GameState = GameStates.PlayState;
+    }
+
+    private void ResetDebugPanel()
+    {
+        if(DebugPanelManager.Instance)
+        {
+            DebugPanelManager.Instance.Reset(); 
+        }
     }
 }

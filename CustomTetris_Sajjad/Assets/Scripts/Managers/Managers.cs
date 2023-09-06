@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Managers : MonoBehaviour
@@ -85,14 +83,12 @@ public class Managers : MonoBehaviour
     {
         get
         {
-            //if (resultManager == null)
-            //    return NullResultManager.Instance;
+            if (resultManager == null)
+                return NullCameraMaster.Instance;
 
             return cameraMaster;
         }
     }
-
-
 
     private void Awake()
     {

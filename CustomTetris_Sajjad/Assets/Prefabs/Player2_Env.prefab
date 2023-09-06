@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7254363815389843700}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlacementHighlighter (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd4720ecc8d7674c85a3950a2fdb001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placementHighlighter: {fileID: 0}
+  placementHighlighter: {fileID: 7254363815389843700}
   unityLayer: 6
 --- !u!114 &125882630588415976
 MonoBehaviour:
@@ -159,7 +159,7 @@ GameObject:
   m_Component:
   - component: {fileID: 736989056818412519}
   - component: {fileID: 2084243421892601458}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

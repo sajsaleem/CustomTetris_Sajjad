@@ -17,6 +17,7 @@ public class GameOver : BaseMenu
     {
         Managers.MenuController.DisableUi(MenuType);
         Managers.GameManager.ResetAll();
+        Managers.GameManager.StartPlay(Managers.GameManager.ActiveGameMode);
         Time.timeScale = 1;
 
     }
@@ -26,6 +27,7 @@ public class GameOver : BaseMenu
         Managers.MenuController.ActivateUi(MenuType.StartMenu);
         Managers.MenuController.DisableUi(MenuType);
         Managers.GameManager.ResetAll();
+        Time.timeScale = 1;
     }
 
     public override void SetSelectablesActiveStatus(bool value)

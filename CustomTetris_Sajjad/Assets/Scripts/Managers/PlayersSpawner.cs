@@ -52,7 +52,9 @@ public class PlayersSpawner : MonoBehaviour ,IPlayersSpawner
         for(int i = 0; i < InstantiatedPlayers.Count; i++)
         {
             if (InstantiatedPlayers[i].gameObject.activeInHierarchy)
+            {
                 InstantiatedPlayers[i].gameObject.SetActive(false);
+            }
         }
     }
 

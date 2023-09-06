@@ -26,7 +26,7 @@ public class PlayerBlockReturnToPool : BaseReturnToPool
     public override void OnOutOfBounds()
     {
         base.OnOutOfBounds();
-        Managers.PiecesObjectPooler.Pool.Release(pieceMovementHandler);
+        Managers.BlockObjectsPooler.Pool.Release(pieceMovementHandler);
         pieceMovementHandler.RemoveBlockHeightFromTower();
         pieceMovementHandler.Reset();
     }

@@ -12,7 +12,7 @@ public class Managers : MonoBehaviour
     private static IResultManager resultManager;
 
 
-    public static IBlocksObjectPooler PiecesObjectPooler
+    public static IBlocksObjectPooler BlockObjectsPooler
     {
         get
         {

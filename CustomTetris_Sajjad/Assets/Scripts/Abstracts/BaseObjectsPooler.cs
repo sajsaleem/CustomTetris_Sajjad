@@ -13,7 +13,6 @@ public abstract class BaseObjectsPooler : MonoBehaviour, IBlocksObjectPooler
 
     #region Private Fields
     private IObjectPool<BaseBlockMovementHandler> _pool;
-    private GameObject blocksParent;
     #endregion
 
     #region Properties
@@ -33,14 +32,14 @@ public abstract class BaseObjectsPooler : MonoBehaviour, IBlocksObjectPooler
 
     public int DefaultCapacity { get => defaultCapacity; }
     public int MaxCapacity { get => maxCapacity;}
-    public GameObject BlocksParent { get => blocksParent; }
+    public GameObject BlocksParent { get; private set; } = default;
     #endregion
 
     #region Virtual Functions
 
     public virtual void Initialize()
     {
-        blocksParent = new GameObject("BlocksParent");
+        BlocksParent = new GameObject("BlocksParent");
     }
 
     public virtual BaseBlockMovementHandler CreatePooledItem()

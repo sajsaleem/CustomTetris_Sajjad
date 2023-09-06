@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Threading.Tasks;
 public class GameManager : MonoBehaviour, IGameManager
 {
     [SerializeField] private BaseLevelMaster levelMaster;
@@ -17,20 +17,20 @@ public class GameManager : MonoBehaviour, IGameManager
     private void Initialize()
     {
         Managers.MenuController.ActivateUi(MenuType.StartMenu);
-        Managers.PiecesObjectPooler.Initialize();
+        Managers.BlockObjectsPooler.Initialize();
     }
 
     public void StartPlay(GameModeType _gameModeType)
     {
-        GameState = GameStates.PlayState;
         ActiveGameMode = _gameModeType;
         Managers.LevelMaster.SetNewLevelSetting();
         Managers.PlayersSpawner.SpawnPlayers(_gameModeType);
-        Managers.MenuController.ActivateUi(MenuType.GameMenu);
+        SetGamePlayState();
     }
 
     public void EndPlay()
     {
+        GameState = GameStates.GameOverState;
         Managers.MenuController.ActivateUi(MenuType.GameOver);
         Managers.MenuController.DisableUi(MenuType.GameMenu);
     }
@@ -38,12 +38,19 @@ public class GameManager : MonoBehaviour, IGameManager
     public void ResetAll()
     {
         // Disable all pooled items;
-        Managers.PiecesObjectPooler.ReturnAllBlocksToPool();
+        Managers.BlockObjectsPooler.ReturnAllBlocksToPool();
 
         // Disable All players spawned;
         Managers.PlayersSpawner.Reset();
 
         Managers.ResultManager.Reset();
 
+    }
+    
+    private async void SetGamePlayState()
+    {
+        await Task.Delay(1000);
+        GameState = GameStates.PlayState;
+        Managers.MenuController.ActivateUi(MenuType.GameMenu);
     }
 }

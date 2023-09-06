@@ -8,8 +8,6 @@ public class BlockSpawner : MonoBehaviour,IBlockSpawner
     private float leftPositionX , rightPositionX;
     private float spawnHeight = default;
 
-    private GameObject blocksParent;
-
     private Vector3 worldPosition;
 
     [SerializeField] private UnityLayers unityLayer;
@@ -22,15 +20,13 @@ public class BlockSpawner : MonoBehaviour,IBlockSpawner
 
     public BaseBlockMovementHandler NewBlock { get; private set; } = default;
 
-    // Start is called before the first frame update
-    void Start()
+
+    private void OnEnable()
     {
-        blocksParent = new GameObject("BlocksParent");
-        blocksParent.transform.position = Vector3.zero;
         Vector2 horizontalSpawnArea = Managers.LevelMaster.GetLevel().horizontalSpawnArea;
         leftPositionX = CalculationsStaticClass.GetHorizontalViewportToWorldPoint(horizontalSpawnArea.x);
         rightPositionX = CalculationsStaticClass.GetHorizontalViewportToWorldPoint(horizontalSpawnArea.y);
-        spawnHeight = CalculationsStaticClass.GetVerticalViewportToWorldPoint( Managers.LevelMaster.GetLevel().spawnHeight);
+        spawnHeight = CalculationsStaticClass.GetVerticalViewportToWorldPoint(Managers.LevelMaster.GetLevel().spawnHeight);
         playerProgressTracker = GetComponent<IPlayerProgressTracker>();
         StartCoroutine(_Spawner());
     }
@@ -41,10 +37,11 @@ public class BlockSpawner : MonoBehaviour,IBlockSpawner
         if (PoolIsNull())
             return;
 
-        NewBlock = Managers.PiecesObjectPooler.Pool.Get();
-        NewBlock.transform.SetParent(blocksParent.transform);
+        NewBlock = Managers.BlockObjectsPooler.Pool.Get();
+        NewBlock.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         Transform[] children = NewBlock.GetComponentsInChildren<Transform>();
-        
+        Managers.BlockObjectsPooler.SetParent(NewBlock.transform);
+
         for(int i =0; i < children.Length; i++)
         {
             children[i].gameObject.layer = (int)unityLayer;
@@ -57,7 +54,7 @@ public class BlockSpawner : MonoBehaviour,IBlockSpawner
 
     private bool PoolIsNull()
     {
-        if (Managers.PiecesObjectPooler.Pool == null)
+        if (Managers.BlockObjectsPooler.Pool == null)
             return true;
 
         return false;

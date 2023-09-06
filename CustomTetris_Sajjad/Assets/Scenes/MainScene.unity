@@ -1427,6 +1427,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1508,6 +1509,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78d37689b21ddf5438e3d3a5822a516c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &995374505
 GameObject:
   m_ObjectHideFlags: 0
@@ -1783,13 +1796,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1195209040}
   - component: {fileID: 1195209039}
+  - component: {fileID: 1195209041}
   m_Layer: 0
   m_Name: miniMapCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!20 &1195209039
 Camera:
   m_ObjectHideFlags: 0
@@ -1856,6 +1870,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1195209041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195209038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78d37689b21ddf5438e3d3a5822a516c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1217239171
 GameObject:
   m_ObjectHideFlags: 0
@@ -2215,6 +2241,7 @@ GameObject:
   - component: {fileID: 1463777500}
   - component: {fileID: 1463777501}
   - component: {fileID: 1463777502}
+  - component: {fileID: 1463777503}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -2261,7 +2288,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a559665482ad5a4aabb79e16d0a0f95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelMaster: {fileID: 1463777498}
 --- !u!114 &1463777498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2344,6 +2370,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0308c997a8ea98e498cafb0ee672385b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1463777503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1463777488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57f48b0ebbdb08e4e83f6444359fe8b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraForPlayer1: {fileID: 963194225}
+  cameraForPlayer2: {fileID: 1195209038}
 --- !u!1 &1488460541
 GameObject:
   m_ObjectHideFlags: 0
@@ -3291,7 +3331,6 @@ MonoBehaviour:
   _menuType: 1
   selectables:
   - {fileID: 1237565642}
-  miniMapCamera: {fileID: 1195209039}
   miniMap: {fileID: 512957241}
   pauseHud: {fileID: 1672323819}
 --- !u!1 &2031821149

@@ -25,21 +25,6 @@ public class PlayerProgressTracker : MonoBehaviour,IPlayerProgressTracker
         Reset();
     }
 
-    //private void Update()
-    //{
-    //    if(TowerManager.TowerHeight >= winCondition)
-    //    {
-    //        // Do Some Action;
-    //        Managers.ResultManager.UpdateWinner(playerType.PlayerTag.ToString());
-    //    }
-
-    //    if(PiecesLost >= lossCondition)
-    //    {
-    //        // Do Loss Action here;
-    //        Managers.ResultManager.UpdateLooser(playerType.PlayerTag.ToString());
-    //    }
-    //}
-
     public void RemoveBlock(Transform _transform)
     {
         // removes block from tower;
@@ -64,7 +49,10 @@ public class PlayerProgressTracker : MonoBehaviour,IPlayerProgressTracker
             // Do Win Action;
             Managers.ResultManager.UpdateWinner(playerType.PlayerTag.ToString());
             Managers.GameManager.EndPlay();
+            return;
         }
+
+        Managers.CameraMaster.MoveUp(playerType.PlayerTag, TowerManager.TowerHeight);
     }
 
     private void UpdatePiecesLost()

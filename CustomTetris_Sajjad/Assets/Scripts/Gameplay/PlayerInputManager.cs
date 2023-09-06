@@ -129,13 +129,13 @@ public class PlayerInputManager : MonoBehaviour ,IPlayerInputManager
 
     private void MoveObject(float moveAmount)
     {
-        if (BlockSpawner != null)
+        if (BlockSpawner != null && BlockSpawner.NewBlock != null)
             BlockSpawner.NewBlock.MovePieceSideWays(moveAmount);
     }
 
     public void RotateObject()
     {
-        if (BlockSpawner != null)
+        if (BlockSpawner != null && BlockSpawner.NewBlock != null)
             BlockSpawner.NewBlock.RotatePiece();
     }
 

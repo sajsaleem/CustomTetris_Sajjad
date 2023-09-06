@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameMenu : BaseMenu
 {
-    [SerializeField] private Camera miniMapCamera; // camera that renders player2's gameplay on a minimap;
+    //[SerializeField] private Camera miniMapCamera; // camera that renders player2's gameplay on a minimap;
     [SerializeField] private GameObject miniMap; // RawImage that uses RenderTexture for camera rending the player2 level;
     [SerializeField] private GameObject pauseHud;
 
@@ -47,8 +47,8 @@ public class GameMenu : BaseMenu
 
     public override void Reset()
     {
-        if (miniMapCamera.gameObject.activeInHierarchy)
-            miniMapCamera.gameObject.SetActive(false);
+        //if (miniMapCamera.gameObject.activeInHierarchy)
+        //    miniMapCamera.gameObject.SetActive(false);
 
         throw new System.NotImplementedException();
     }
@@ -61,7 +61,7 @@ public class GameMenu : BaseMenu
 
     private void SetMiniMapCameraActiveStatus(bool value)
     {
-        miniMapCamera.gameObject.SetActive(value);
+        //miniMapCamera.gameObject.SetActive(value);
 
     }
 

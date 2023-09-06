@@ -10,6 +10,7 @@ public class Managers : MonoBehaviour
     private static IPlayersSpawner playersSpawner;
     private static IMenuController menuController;
     private static IResultManager resultManager;
+    private static ICameraMaster cameraMaster;
 
 
     public static IBlocksObjectPooler BlockObjectsPooler
@@ -80,6 +81,17 @@ public class Managers : MonoBehaviour
         }
     }
 
+    public static ICameraMaster CameraMaster
+    {
+        get
+        {
+            //if (resultManager == null)
+            //    return NullResultManager.Instance;
+
+            return cameraMaster;
+        }
+    }
+
 
 
     private void Awake()
@@ -90,5 +102,6 @@ public class Managers : MonoBehaviour
         playersSpawner = GetComponent<IPlayersSpawner>();
         menuController = GetComponent<IMenuController>();
         resultManager = GetComponent<IResultManager>();
+        cameraMaster = GetComponent<ICameraMaster>();
     }
 }

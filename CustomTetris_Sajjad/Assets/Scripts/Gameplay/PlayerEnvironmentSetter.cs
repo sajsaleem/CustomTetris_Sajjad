@@ -9,7 +9,7 @@ public class PlayerEnvironmentSetter : MonoBehaviour
 
     private LevelData _levelData;
 
-    private void Start()
+    private void OnEnable()
     {
         Initialize();
     }
@@ -19,10 +19,11 @@ public class PlayerEnvironmentSetter : MonoBehaviour
         _levelData = Managers.LevelMaster.GetLevel();
         surface.position = _levelData.surfacePosition;
         surface.localScale = _levelData.surfaceDimensions;
-        
+
         // Calculates finishline position by using wincondition value and by using dimensions of surface;
         float finishLineYPos = CalculationsStaticClass.GetVerticalDistance(_levelData.winCondition, surface.position.y, surface.localScale.y);
         finishLine.position = new Vector3(finishLine.position.x, finishLineYPos, finishLine.position.z);
         Managers.LevelMaster.UpdateWinCondition(finishLine.position.y);
+        Managers.CameraMaster.ShowFinishLine(finishLine.position.y);
     }
 }

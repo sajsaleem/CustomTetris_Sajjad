@@ -35,4 +35,9 @@ public class NullGameManager : IGameManager
     {
 
     }
+
+    public void UpdateGameState(GameStates _gameStates)
+    {
+
+    }
 }

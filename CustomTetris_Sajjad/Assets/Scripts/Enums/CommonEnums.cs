@@ -23,8 +23,8 @@ public enum GameStates
 
 public enum PlayerTags
 {
-    Player0 = 0,
-    Player1 = 1
+    Player1 = 0,
+    Player2 = 1
 }
 
 public enum MenuType

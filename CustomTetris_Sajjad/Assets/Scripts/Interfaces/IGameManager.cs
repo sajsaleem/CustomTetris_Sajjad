@@ -9,4 +9,5 @@ public interface IGameManager
     void StartPlay(GameModeType _gameModeType);
     void EndPlay();
     void ResetAll();
+    void UpdateGameState(GameStates _gamestate);
 }

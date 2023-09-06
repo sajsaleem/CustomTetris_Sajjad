@@ -101,7 +101,6 @@ public class BotInputManager : MonoBehaviour, IPlayerInputManager
             {
                 ManagePieceMovement();
                 moved++;
-                //yield return new WaitForSeconds(0.1f);
             }
 
             else if (decisionProbability <= 0.4f && rotated < rotationDecision)

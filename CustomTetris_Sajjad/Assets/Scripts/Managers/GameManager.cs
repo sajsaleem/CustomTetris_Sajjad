@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 public class GameManager : MonoBehaviour, IGameManager
-{
-    [SerializeField] private BaseLevelMaster levelMaster;
-    
+{    
     public GameStates GameState { get; private set; } = default;
     public GameModeType ActiveGameMode { get; private set; } = default;
 
@@ -18,14 +16,17 @@ public class GameManager : MonoBehaviour, IGameManager
     {
         Managers.MenuController.ActivateUi(MenuType.StartMenu);
         Managers.BlockObjectsPooler.Initialize();
+        Managers.CameraMaster.Initialize();
     }
 
     public void StartPlay(GameModeType _gameModeType)
     {
         ActiveGameMode = _gameModeType;
         Managers.LevelMaster.SetNewLevelSetting();
+        Managers.CameraMaster.SetCamerasActiveStatus(ActiveGameMode);
         Managers.PlayersSpawner.SpawnPlayers(_gameModeType);
-        SetGamePlayState();
+        Managers.MenuController.ActivateUi(MenuType.GameMenu);
+
     }
 
     public void EndPlay()
@@ -46,11 +47,16 @@ public class GameManager : MonoBehaviour, IGameManager
         Managers.ResultManager.Reset();
 
     }
-    
+
+    public void UpdateGameState(GameStates _gamestate)
+    {
+        GameState = _gamestate;
+    }
+
+
     private async void SetGamePlayState()
     {
         await Task.Delay(1000);
-        GameState = GameStates.PlayState;
-        Managers.MenuController.ActivateUi(MenuType.GameMenu);
+        //GameState = GameStates.PlayState;
     }
 }

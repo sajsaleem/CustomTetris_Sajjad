@@ -26,7 +26,6 @@ public class BlockSpawner : MonoBehaviour,IBlockSpawner
         Vector2 horizontalSpawnArea = Managers.LevelMaster.GetLevel().horizontalSpawnArea;
         leftPositionX = CalculationsStaticClass.GetHorizontalViewportToWorldPoint(horizontalSpawnArea.x);
         rightPositionX = CalculationsStaticClass.GetHorizontalViewportToWorldPoint(horizontalSpawnArea.y);
-        spawnHeight = CalculationsStaticClass.GetVerticalViewportToWorldPoint(Managers.LevelMaster.GetLevel().spawnHeight);
         playerProgressTracker = GetComponent<IPlayerProgressTracker>();
         StartCoroutine(_Spawner());
     }
@@ -41,6 +40,9 @@ public class BlockSpawner : MonoBehaviour,IBlockSpawner
     {
         if (PoolIsNull())
             return;
+
+        spawnHeight = CalculationsStaticClass.GetVerticalViewportToWorldPoint(Managers.LevelMaster.GetLevel().spawnHeight);
+
 
         NewBlock = Managers.BlockObjectsPooler.Pool.Get();
         NewBlock.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));

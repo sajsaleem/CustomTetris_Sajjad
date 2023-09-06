@@ -14,11 +14,11 @@ public class PlayersSpawner : MonoBehaviour ,IPlayersSpawner
         switch(_gameModeType)
         {
             case GameModeType.SinglePlayer:
-                InstantiatePlayer(PlayerTags.Player0);
+                InstantiatePlayer(PlayerTags.Player1);
                 break;
             case GameModeType.TwoPlayer:
-                InstantiatePlayer(PlayerTags.Player0);
                 InstantiatePlayer(PlayerTags.Player1);
+                InstantiatePlayer(PlayerTags.Player2);
                 break;
         }
     }

@@ -52,14 +52,15 @@ public class GameOver : BaseMenu
     private void HandleResultMsg()
     {
         string winner = Managers.ResultManager.WinnerName;
+        string looser = Managers.ResultManager.LooserName;
 
         Debug.Log("<color=green>Winner Name: </color>" + winner);
 
-        if (winner == PlayerTags.Player0.ToString())
+        if (winner == PlayerTags.Player1.ToString())
         {
             resultMsg.text = "You Won !!!";
         }
-        else
+        else if(looser == PlayerTags.Player1.ToString())
         {
             resultMsg.text = "You were not able to win :(";
         }

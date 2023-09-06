@@ -14,6 +14,7 @@ public interface IPlayerInputManager
     void HandleMouseInput();
     void HandleTouchInput();
     void ManagePieceMovement();
+    void RotateObject();
     void ScreenTouchBegan(Vector3 _position);
     void ScreenTouchEnd();
 }

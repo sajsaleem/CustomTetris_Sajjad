@@ -17,6 +17,7 @@ public class BlocksDataModifier : ScriptableWizard
     [SerializeField] private float targetRotation = default;
     [SerializeField] private Vector3 gravity = Physics.gravity;
     [SerializeField] private Vector3 localScale = Vector3.one;
+    [SerializeField] private Vector2 horizontalMovementArea = default;
     #endregion
 
     #region private Variables
@@ -32,6 +33,7 @@ public class BlocksDataModifier : ScriptableWizard
     private float originaltargetRotation = default;
     private Vector3 originalgravity = default;
     private Vector3 originallocalScale = default;
+    private Vector2 originalhorizontalMovementArea = default;
     #endregion
 
     [MenuItem("Tools/Blocks Data Editor")]
@@ -87,6 +89,8 @@ public class BlocksDataModifier : ScriptableWizard
             return true;
         if (localScale != originallocalScale)
             return true;
+        if (horizontalMovementArea != originalhorizontalMovementArea)
+            return true;
 
         return false;
     }
@@ -126,6 +130,7 @@ public class BlocksDataModifier : ScriptableWizard
             originalrotationSpeed = _blockSettings.blockData.rotationSpeed;
             originallocalScale = _blockSettings.blockData.localScale;
             originalgravity = _blockSettings.blockData.gravity;
+            originalhorizontalMovementArea = _blockSettings.blockData.horizontalMovementArea;
 
             normalFallSpeed = originalnormalFallSpeed;
             freefallSpeed = originalfreefallSpeed;
@@ -133,6 +138,7 @@ public class BlocksDataModifier : ScriptableWizard
             rotationSpeed = originalrotationSpeed;
             localScale = originallocalScale;
             gravity = originalgravity;
+            horizontalMovementArea = originalhorizontalMovementArea;
         }
     }
 
@@ -144,6 +150,7 @@ public class BlocksDataModifier : ScriptableWizard
         _blockSettings.blockData.targetRotation = targetRotation;
         _blockSettings.blockData.localScale = localScale;
         _blockSettings.blockData.gravity = gravity;
+        _blockSettings.blockData.horizontalMovementArea = horizontalMovementArea;
     }
 
     // Create a dropdown in the wizard for selecting the file.

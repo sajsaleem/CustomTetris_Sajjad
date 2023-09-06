@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseBlockMovementHandler : MonoBehaviour,  IBlockMovementHandler
+public abstract class BaseBlockMovementHandler : MonoBehaviour, IBlockMovementHandler
 {
     #region serialized fields
     [SerializeField] private BlockState _blockState;
+    [SerializeField] private BlockType _blockType;
     [SerializeField] private Transform rotationPivot;
     [SerializeField] private BaseBlockSettings blockSettings;
     #endregion
@@ -26,11 +27,14 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour,  IBlockMovementH
     #region properties
     public bool IsPlaced { get; private set; } = default;
     public bool IsMoveable { get; private set; } = default;
-    public bool MyRigidBody => _myRigidBody;
-    public bool IsActive => gameObject.activeInHierarchy;
-    public BlockState BlockState => _blockState;
-    public Vector3 LocalScale => transform.localScale;
-    public Vector3 Position => transform.position;
+    public bool MyRigidBody { get => _myRigidBody; }
+    public bool IsActive { get => gameObject.activeInHierarchy;}
+    public BlockState BlockState { get => _blockState; }
+    public BlockType BlockType { get => _blockType; }
+    public Vector3 LocalScale { get => transform.localScale; }
+    public Vector3 Position { get => transform.position; }
+    public BaseBlockSettings BlockSettings { get => blockSettings; }
+
     #endregion
 
     #region Virtual Functions
@@ -166,7 +170,6 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour,  IBlockMovementH
             IsPlaced = true;
             IsMoveable = false;
             _constantForce.enabled = true;
-            //_myRigidBody.useGravity = true;
             UpdatePieceState(BlockState.IsPlaced);
         }
     }
@@ -181,7 +184,7 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour,  IBlockMovementH
     {
         if (placedheight <= 0 && _blockState == BlockState.InStableState && !isAddedToTower)
         {
-            playerProgressTracker.AddBlock(rotationPivot); //TowerManager.AddBlock(rotationPivot);
+            playerProgressTracker.AddBlock(rotationPivot);
             isAddedToTower = true;
         }
     }

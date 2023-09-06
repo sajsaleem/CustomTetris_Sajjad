@@ -535,6 +535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _blockState: 0
+  _blockType: 4
   rotationPivot: {fileID: 4000010207149232}
   blockSettings: {fileID: 11400000, guid: 830b3de1b2cd311499e008f1e10c032b, type: 2}
 --- !u!114 &-3577101324081188505

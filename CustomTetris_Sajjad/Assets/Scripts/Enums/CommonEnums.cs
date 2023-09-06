@@ -34,3 +34,14 @@ public enum MenuType
     Pause = 2,
     GameOver = 3
 }
+
+public enum BlockType
+{
+    I,
+    J,
+    L,
+    T,
+    O,
+    S,
+    Z
+}

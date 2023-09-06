@@ -9,6 +9,7 @@ public class blockData
     public float freefallSpeed = default;
     public float rotationSpeed = default;
     public float targetRotation = default;
+    public Vector2 horizontalMovementArea; // 0 => left of camera , 1 => right of camera;
     public Vector3 gravity = Physics.gravity;
     public Vector3 localScale = Vector3.one;
 }

@@ -20,7 +20,7 @@ public class PlayerInputManager : MonoBehaviour ,IPlayerInputManager
     private void Start()
     {
         BlockSpawner = GetComponent<IBlockSpawner>();
-        Vector3 pos = Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0.3f, 0.6f), 0.8f, 0));
+        //Vector3 pos = Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0.3f, 0.6f), 0.8f, 0));
     }
 
     void Update()
@@ -133,7 +133,7 @@ public class PlayerInputManager : MonoBehaviour ,IPlayerInputManager
             BlockSpawner.NewBlock.MovePieceSideWays(moveAmount);
     }
 
-    private void RotateObject()
+    public void RotateObject()
     {
         if (BlockSpawner != null)
             BlockSpawner.NewBlock.RotatePiece();

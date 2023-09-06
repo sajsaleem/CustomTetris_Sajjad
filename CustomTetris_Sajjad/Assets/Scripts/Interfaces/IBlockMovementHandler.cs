@@ -9,8 +9,10 @@ public interface IBlockMovementHandler
     bool MyRigidBody { get; }
     bool IsActive { get; }
     BlockState BlockState { get; }
+    BlockType BlockType { get; }
     Vector3 LocalScale { get; }
     Vector3 Position { get; }
+    BaseBlockSettings BlockSettings { get; }
 
     void Initialize(IPlayerProgressTracker playerProgressTracker);
     void RotatePiece();

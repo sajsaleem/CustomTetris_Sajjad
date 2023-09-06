@@ -31,6 +31,11 @@ public class BlockSpawner : MonoBehaviour,IBlockSpawner
         StartCoroutine(_Spawner());
     }
 
+    private void OnDisable()
+    {
+        StopCoroutine(_Spawner());
+    }
+
 
     public void SpawnPiece()
     {
@@ -69,6 +74,8 @@ public class BlockSpawner : MonoBehaviour,IBlockSpawner
             SpawnPiece();
             yield return new WaitUntil(() => NewBlock.IsPlaced);
         }
+
+        yield break;
     }
 
 }

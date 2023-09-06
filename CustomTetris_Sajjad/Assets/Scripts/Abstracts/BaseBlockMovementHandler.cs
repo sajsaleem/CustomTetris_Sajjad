@@ -14,6 +14,7 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour, IBlockMovementHa
     #region private fields
     private Rigidbody _myRigidBody;
     private ConstantForce _constantForce;
+    private Transform placementHighlighter;
     private bool rotatePiece = default;
     private bool isAddedToTower = default;
     private float targetRotation = default;
@@ -38,7 +39,7 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour, IBlockMovementHa
     #endregion
 
     #region Virtual Functions
-    public virtual void Initialize(IPlayerProgressTracker _playerProgressTracker)
+    public virtual void Initialize(IPlayerProgressTracker _playerProgressTracker, Transform highlighter)
     {
         _myRigidBody ??= GetComponent<Rigidbody>();
         _constantForce ??= GetComponent<ConstantForce>();
@@ -51,6 +52,9 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour, IBlockMovementHa
         UpdatePieceState(BlockState.Falling);
         placedheight = 0;
         playerProgressTracker = _playerProgressTracker;
+        placementHighlighter = highlighter;
+        float xScale = CalculationsStaticClass.GetChildrenScale(rotationPivot);
+        placementHighlighter.localScale = new Vector3(xScale, placementHighlighter.localScale.y, placementHighlighter.localScale.z);
     }
 
     public virtual void MyEnable()
@@ -58,6 +62,9 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour, IBlockMovementHa
         targetRotation = blockSettings.blockData.targetRotation;
         rotationSpeed = blockSettings.blockData.rotationSpeed;
         fallSpeed = blockSettings.CalculateNormalFallSpeed();
+
+
+
     }
 
     public virtual void RotatePiece()
@@ -101,6 +108,9 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour, IBlockMovementHa
 
             HandleRotationDisable(rotateValue);
         }
+
+        placementHighlighter.position = new Vector3(rotationPivot.position.x, placementHighlighter.position.y, placementHighlighter.position.z);
+
     }
 
     public virtual void FreeFallPiece()
@@ -135,6 +145,9 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour, IBlockMovementHa
         if (Mathf.Approximately(rotateValue, targetRotation))
         {
             rotatePiece = false;
+            float xScale = CalculationsStaticClass.GetChildrenScale(rotationPivot);
+
+            placementHighlighter.localScale = new Vector3(xScale, placementHighlighter.localScale.y, placementHighlighter.localScale.z);
         }
     }
 

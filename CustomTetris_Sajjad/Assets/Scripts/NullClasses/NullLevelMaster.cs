@@ -42,8 +42,14 @@ public class NullLevelMaster : ILevelMaster
         return 0;
     }
 
+    public float SurfaceHeight()
+    {
+        return 0;
+    }
+
     public void UpdateWinCondition(float value)
     {
 
     }
+
 }

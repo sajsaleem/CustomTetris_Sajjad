@@ -7,7 +7,6 @@ public static class CalculationsStaticClass
 {
     public static Vector2 GetScreenBounds()
     {
-        //return Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
         return Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0));
     }
 
@@ -49,6 +48,32 @@ public static class CalculationsStaticClass
     {
         Vector3 pos = Camera.main.ViewportToWorldPoint(new Vector3(value, 0, 0));
         return pos.x;
+    }
+
+    public static float GetChildrenScale(Transform _transform)
+    {
+        Vector2 totalSize;
+        float minX = Mathf.Infinity;
+        float maxX = -Mathf.Infinity;
+        float minY = Mathf.Infinity;
+        float maxY = -Mathf.Infinity;
+
+        foreach (Transform child in _transform)
+        {
+            var col = child.GetComponent<BoxCollider>();
+            if (col != null)
+            {
+                if (col.bounds.max.x > maxX) maxX = col.bounds.max.x;
+                if (col.bounds.min.x < minX) minX = col.bounds.min.x;
+
+                if (col.bounds.max.y > maxY) maxY = col.bounds.max.y;
+                if (col.bounds.min.y < minY) minY = col.bounds.min.y;
+            }
+        }
+
+        totalSize = new Vector2(maxX - minX, maxY - minY);
+
+        return totalSize.x;
     }
 }
  

@@ -24,9 +24,9 @@ public class NormalBlockMovementHandler : BaseBlockMovementHandler
         SetMovementArea();
     }
 
-    public override void Initialize(IPlayerProgressTracker playerProgressTracker)
+    public override void Initialize(IPlayerProgressTracker playerProgressTracker , Transform highlighter)
     {
-        base.Initialize(playerProgressTracker);
+        base.Initialize(playerProgressTracker, highlighter);
     }
 
     public override void MovePieceSideWays(float moveAmount)

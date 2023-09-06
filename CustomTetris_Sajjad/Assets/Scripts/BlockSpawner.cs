@@ -5,18 +5,13 @@ using System.Threading.Tasks;
 
 public class BlockSpawner : MonoBehaviour,IBlockSpawner
 {
+    [SerializeField] private Transform placementHighlighter;
+    [SerializeField] private UnityLayers unityLayer;
+
     private float leftPositionX , rightPositionX;
     private float spawnHeight = default;
-
     private Vector3 worldPosition;
-
-    [SerializeField] private UnityLayers unityLayer;
-    //[SerializeField] private Transform blockSpawner;
-
     private IPlayerProgressTracker playerProgressTracker;
-
-
-    //private BaseBlockMovementHandler newPiece;
 
     public BaseBlockMovementHandler NewBlock { get; private set; } = default;
 
@@ -27,6 +22,7 @@ public class BlockSpawner : MonoBehaviour,IBlockSpawner
         leftPositionX = CalculationsStaticClass.GetHorizontalViewportToWorldPoint(horizontalSpawnArea.x);
         rightPositionX = CalculationsStaticClass.GetHorizontalViewportToWorldPoint(horizontalSpawnArea.y);
         playerProgressTracker = GetComponent<IPlayerProgressTracker>();
+        SetPlacementHiglighterActiveStatus(false);
         StartCoroutine(_Spawner());
     }
 
@@ -42,7 +38,7 @@ public class BlockSpawner : MonoBehaviour,IBlockSpawner
             return;
 
         spawnHeight = CalculationsStaticClass.GetVerticalViewportToWorldPoint(Managers.LevelMaster.GetLevel().spawnHeight);
-
+        AdjustPlacementHighlighterHeight();
 
         NewBlock = Managers.BlockObjectsPooler.Pool.Get();
         NewBlock.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
@@ -56,7 +52,9 @@ public class BlockSpawner : MonoBehaviour,IBlockSpawner
 
         float randomXPosition = Random.Range(leftPositionX, rightPositionX);
         NewBlock.transform.position = new Vector3(randomXPosition, spawnHeight, NewBlock.transform.position.z);
-        NewBlock.Initialize(playerProgressTracker);
+        NewBlock.Initialize(playerProgressTracker, placementHighlighter);
+        SetPlacementHiglighterActiveStatus(true);
+
     }
 
     private bool PoolIsNull()
@@ -67,6 +65,21 @@ public class BlockSpawner : MonoBehaviour,IBlockSpawner
         return false;
     }
 
+    private void AdjustPlacementHighlighterHeight()
+    {
+        float camHeight = CalculationsStaticClass.GetVerticalViewportToWorldPoint(1);
+        float surfaceHeight = Managers.LevelMaster.SurfaceHeight()/1.5f;
+
+        float difference = camHeight - surfaceHeight;
+
+        placementHighlighter.localScale = new Vector3(placementHighlighter.localScale.x, difference, placementHighlighter.localScale.z);
+    }
+
+    private void SetPlacementHiglighterActiveStatus(bool value)
+    {
+        placementHighlighter.gameObject.SetActive(value);
+    }
+
     private IEnumerator _Spawner()
     {
         yield return new WaitUntil(() => Managers.GameManager.GameState == GameStates.PlayState);
@@ -75,6 +88,8 @@ public class BlockSpawner : MonoBehaviour,IBlockSpawner
         {
             SpawnPiece();
             yield return new WaitUntil(() => NewBlock.IsPlaced);
+            SetPlacementHiglighterActiveStatus(false);
+
         }
 
         yield break;

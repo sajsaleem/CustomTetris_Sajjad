@@ -20,6 +20,7 @@ public interface ILevelMaster
     LevelData GetLevel();
     int WinCondition();
     int LossCondition();
+    float SurfaceHeight();
     void SetNewLevelSetting();
     void UpdateWinCondition(float value);
 

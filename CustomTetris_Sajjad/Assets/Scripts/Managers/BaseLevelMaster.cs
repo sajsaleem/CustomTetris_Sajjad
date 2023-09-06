@@ -58,6 +58,11 @@ public abstract class BaseLevelMaster : MonoBehaviour,ILevelMaster
         return activeLevelData.lossCondition;
     }
 
+    public float SurfaceHeight()
+    {
+        return activeLevelData.surfaceDimensions.y;
+    }
+
     public void UpdateWinCondition(float value)
     {
         if (_winCondition <= 0)

@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour, IGameManager
 
     public void EndPlay()
     {
-        Debug.Log("Result Is result screen");
         Managers.MenuController.ActivateUi(MenuType.GameOver);
         Managers.MenuController.DisableUi(MenuType.GameMenu);
     }

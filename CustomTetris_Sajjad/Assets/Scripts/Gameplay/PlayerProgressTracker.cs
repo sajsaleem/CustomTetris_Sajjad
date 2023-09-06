@@ -20,23 +20,49 @@ public class PlayerProgressTracker : MonoBehaviour,IPlayerProgressTracker
         lossCondition = Managers.LevelMaster.LossCondition();
     }
 
-    private void Update()
+    //private void Update()
+    //{
+    //    if(TowerManager.TowerHeight >= winCondition)
+    //    {
+    //        // Do Some Action;
+    //        Managers.ResultManager.UpdateWinner(playerType.PlayerTag.ToString());
+    //    }
+
+    //    if(PiecesLost >= lossCondition)
+    //    {
+    //        // Do Loss Action here;
+    //        Managers.ResultManager.UpdateLooser(playerType.PlayerTag.ToString());
+    //    }
+    //}
+
+    public void RemoveBlock(Transform _transform)
     {
-        if(TowerManager.TowerHeight >= winCondition)
-        {
-            // Do Some Action;
-            Managers.ResultManager.UpdateWinner(playerType.PlayerTag.ToString());
-        }
+        // removes block from tower;
+        TowerManager.RemoveBlock(_transform);
+        UpdatePiecesLost();
 
         if(PiecesLost >= lossCondition)
         {
             // Do Loss Action here;
             Managers.ResultManager.UpdateLooser(playerType.PlayerTag.ToString());
+            Managers.GameManager.EndPlay();
         }
-
     }
 
-    public void UpdatePiecesLost()
+    public void AddBlock(Transform _transform)
+    {
+        //Adds block to tower;
+        TowerManager.AddBlock(_transform);
+
+        if (TowerManager.TowerHeight >= winCondition)
+        {
+            // Do Win Action;
+            Managers.ResultManager.UpdateWinner(playerType.PlayerTag.ToString());
+            Managers.GameManager.EndPlay();
+        }
+    }
+
+    private void UpdatePiecesLost()
     {
         PiecesLost++;
     }

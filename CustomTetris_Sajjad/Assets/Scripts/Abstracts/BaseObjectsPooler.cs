@@ -80,7 +80,5 @@ public abstract class BaseObjectsPooler : MonoBehaviour, IBlocksObjectPooler
         }
     }
 
-
-
     #endregion
 }

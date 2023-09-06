@@ -9,8 +9,6 @@ public class TowerManager : MonoBehaviour, ITowerManager
 
     private List<Transform> towerBlocks = new List<Transform>();
 
-    float blockHeightY = default;
-
     public void AddBlock(Transform _transform)
     {
         towerBlocks.Add(_transform);

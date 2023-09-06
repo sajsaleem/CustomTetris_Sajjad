@@ -7,6 +7,8 @@ public interface IPlayerProgressTracker
     ITowerManager TowerManager { get; }
     int PiecesLost { get; }
 
-    void UpdatePiecesLost();
+
+    void RemoveBlock(Transform _transform);
+    void AddBlock(Transform _transform);
     void Reset();
 }

@@ -16,7 +16,7 @@ public class GameOver : BaseMenu
     public void OnReplayCallback()
     {
         Managers.MenuController.DisableUi(MenuType);
-        Managers.ResultManager.Reset();
+        Managers.GameManager.ResetAll();
         Time.timeScale = 1;
 
     }
@@ -50,6 +50,8 @@ public class GameOver : BaseMenu
     private void HandleResultMsg()
     {
         string winner = Managers.ResultManager.WinnerName;
+
+        Debug.Log("<color=green>Winner Name: </color>" + winner);
 
         if (winner == PlayerTags.Player0.ToString())
         {

@@ -21,5 +21,6 @@ public interface ILevelMaster
     int WinCondition();
     int LossCondition();
     void SetNewLevelSetting();
+    void UpdateWinCondition(float value);
 
 }

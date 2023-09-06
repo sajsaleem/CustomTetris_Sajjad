@@ -20,6 +20,11 @@ public class PlayerProgressTracker : MonoBehaviour,IPlayerProgressTracker
         lossCondition = Managers.LevelMaster.LossCondition();
     }
 
+    private void OnDisable()
+    {
+        Reset();
+    }
+
     //private void Update()
     //{
     //    if(TowerManager.TowerHeight >= winCondition)

@@ -40,7 +40,6 @@ public class PlayersSpawner : MonoBehaviour ,IPlayersSpawner
         {
             if (players[i].PlayerTag == playerTag)
             {
-                Debug.Log("Instantiate New Player");
                 newObject = Instantiate(players[i]);
                 InstantiatedPlayers.Add(newObject);
                 break;

@@ -58,8 +58,6 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour,  IBlockMovementH
 
     public virtual void RotatePiece()
     {
-        Debug.Log("Rotate Piece" + IsPlaced);
-
         if (IsPlaced || !IsMoveable)
             return;
 
@@ -81,7 +79,6 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour,  IBlockMovementH
         if (!IsMoveable)
             return;
 
-        //Debug.Log("10/Screen.dpi: " + 10 / Screen.dpi);
 #if UNITY_ANDROID || UNITY_IOS
         transform.position += new Vector3(Mathf.Sign(moveAmount) * 5f * Time.deltaTime, 0, 0);
 #endif
@@ -89,16 +86,6 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour,  IBlockMovementH
         transform.position += new Vector3(Mathf.Sign(moveAmount) * 10 * Time.deltaTime, 0, 0);
 #endif
 
-
-        //float newPosition = transform.position.x + Mathf.Sign(moveAmount);
-        //newPosition = Mathf.MoveTowards(transform.position.x, newPosition, 2 * Time.unscaledDeltaTime);
-        //transform.position = new Vector3(newPosition, transform.position.y, transform.position.z);
-
-        //Debug.Log("moveAmount: " + moveAmount);
-        //if (!IsMoveable)
-        //    return;
-
-        //transform.Translate(new Vector3(moveAmount, 0, 0));
     }
 
     public virtual void MyUpdate()
@@ -128,21 +115,16 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour,  IBlockMovementH
         transform.position = Vector3.zero;
         _myRigidBody.freezeRotation = true;
         placedheight = 0;
+        isAddedToTower = false;
     }
 
     public virtual void RemoveBlockHeightFromTower()
     {
-        playerProgressTracker.TowerManager.RemoveBlock(rotationPivot);
-        //Managers.TowerManager.RemoveBlock(placedheight);
+        playerProgressTracker.RemoveBlock(rotationPivot);
     }
     #endregion
 
     #region Private Functions
-
-    private void OnDisable()
-    {
-        isAddedToTower = false;
-    }
 
     private void HandleRotationDisable(float rotateValue)
     {
@@ -199,7 +181,7 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour,  IBlockMovementH
     {
         if (placedheight <= 0 && _blockState == BlockState.InStableState && !isAddedToTower)
         {
-            playerProgressTracker.TowerManager.AddBlock(rotationPivot);
+            playerProgressTracker.AddBlock(rotationPivot); //TowerManager.AddBlock(rotationPivot);
             isAddedToTower = true;
         }
     }

@@ -9,6 +9,11 @@ public class TowerManager : MonoBehaviour, ITowerManager
 
     private List<Transform> towerBlocks = new List<Transform>();
 
+    private void OnDisable()
+    {
+        Reset();
+    }
+
     public void AddBlock(Transform _transform)
     {
         towerBlocks.Add(_transform);
@@ -44,5 +49,6 @@ public class TowerManager : MonoBehaviour, ITowerManager
     public void Reset()
     {
         TowerHeight = 0;
+        towerBlocks.Clear();
     }
 }

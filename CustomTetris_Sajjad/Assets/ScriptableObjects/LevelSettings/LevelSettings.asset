@@ -17,6 +17,6 @@ MonoBehaviour:
     surfacePosition: {x: 0, y: 2, z: 0}
     horizontalSpawnArea: {x: 0.3, y: 0.6}
     spawnHeight: 0.9
-    winCondition: 6
-    lossCondition: 1
+    winCondition: 40
+    lossCondition: 5
     isUsed: 1

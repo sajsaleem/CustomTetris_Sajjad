@@ -18,6 +18,8 @@ public class PlayerProgressTracker : MonoBehaviour,IPlayerProgressTracker
         playerType = GetComponent<IPlayerType>();
         winCondition = Managers.LevelMaster.WinCondition();
         lossCondition = Managers.LevelMaster.LossCondition();
+
+        Debug.Log("Win Condition: " + winCondition);
     }
 
     private void OnDisable()
@@ -60,6 +62,7 @@ public class PlayerProgressTracker : MonoBehaviour,IPlayerProgressTracker
     private void UpdatePiecesLost()
     {
         PiecesLost++;
+        UpdatePiecesLostOnDebug();
 
     }
 

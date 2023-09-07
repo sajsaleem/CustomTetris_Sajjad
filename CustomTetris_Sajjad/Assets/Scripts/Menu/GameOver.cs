@@ -17,7 +17,7 @@ public class GameOver : BaseMenu
     {
         Managers.MenuController.DisableUi(MenuType);
         Managers.GameManager.ResetAll();
-        Managers.GameManager.StartPlay(Managers.GameManager.ActiveGameMode);
+        Managers.GameManager.StartLevelSequence(Managers.GameManager.ActiveGameMode);
         Time.timeScale = 1;
 
     }

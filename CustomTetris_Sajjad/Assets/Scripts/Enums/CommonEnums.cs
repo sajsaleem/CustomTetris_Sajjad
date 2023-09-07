@@ -4,7 +4,9 @@ public enum BlockState
     FreeFall = 1,
     IsPlaced = 2,
     InStableState = 3,
-    Disabled = 4
+    Disabled = 4,
+    FallAfterPlace = 5, // only to be used when block starts falling after the placement;
+    FellOutOfBounds = 6
 }
 
 public enum GameModeType

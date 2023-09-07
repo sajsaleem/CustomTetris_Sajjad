@@ -38,6 +38,11 @@ public static class CalculationsStaticClass
         return posY + (_transform.localScale.y / 2);
     }
 
+    public static float GetMaxHeightOfObject(float height, float posY)
+    {
+        return posY + (height / 2);
+    }
+
     public static float GetVerticalViewportToWorldPoint(float value)
     {
         Vector3 pos = Camera.main.ViewportToWorldPoint(new Vector3(0, value, 0));
@@ -50,13 +55,10 @@ public static class CalculationsStaticClass
         return pos.x;
     }
 
-    public static float GetChildrenScale(Transform _transform)
+    public static float GetHorizontalChilrenScale(Transform _transform)
     {
-        Vector2 totalSize;
         float minX = Mathf.Infinity;
         float maxX = -Mathf.Infinity;
-        float minY = Mathf.Infinity;
-        float maxY = -Mathf.Infinity;
 
         foreach (Transform child in _transform)
         {
@@ -65,15 +67,31 @@ public static class CalculationsStaticClass
             {
                 if (col.bounds.max.x > maxX) maxX = col.bounds.max.x;
                 if (col.bounds.min.x < minX) minX = col.bounds.min.x;
+            }
+        }
+
+        return maxX - minX;
+    }
+
+    public static float GetVerticalChildrenScale(Transform _transform)
+    {
+        float minY = Mathf.Infinity;
+        float maxY = -Mathf.Infinity;
+
+        foreach (Transform child in _transform)
+        {
+            var col = child.GetComponent<BoxCollider>();
+            if (col != null)
+            {
 
                 if (col.bounds.max.y > maxY) maxY = col.bounds.max.y;
                 if (col.bounds.min.y < minY) minY = col.bounds.min.y;
             }
         }
 
-        totalSize = new Vector2(maxX - minX, maxY - minY);
+        Debug.Log("Height: " + (maxY - minY));
 
-        return totalSize.x;
+        return maxY - minY;
     }
 }
  

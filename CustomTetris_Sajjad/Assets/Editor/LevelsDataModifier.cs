@@ -12,18 +12,26 @@ public class LevelsDataModifier : ScriptableWizard
     #region Exposed Variables
     [Tooltip("Updates the Scaling of surface in three-dimensions")]
     [SerializeField] private Vector3 surfaceDimensions = default;
+
+    [Tooltip("Updates the surface position from 0 position")]
     [SerializeField] private Vector3 surfacePosition = default;
+
+    [Tooltip("Defines the range in X-Axis for spawning new blocks")]
     [SerializeField] private Vector2 horizontalSpawnArea; // 0 left , 1 right in X-Axis in normalized Viewport;
+
+    [Tooltip("Height from where blocks should spawn within Camera Height")]
     [SerializeField] private float spawnHeight = default; // 1 top of the screen in normalized Viewport;
+
+    [Tooltip("Height of tower required for winning")]
     [SerializeField] private int winCondition = default;
+
+    [Tooltip("Amount of blocks lost that can make player loss a game")]
     [SerializeField] private int lossCondition = default;
     #endregion
 
     #region private Variables
     private string directoryPath = "Assets/ScriptableObjects/LevelSettings/";
-    private string selectedFileName;
     private List<string> fileNamesList = default;
-    private LevelData levelData = new LevelData();
     private LevelsDataModifier instance;
     private BaseLevelSettings levelSettings = null;
 
@@ -103,8 +111,7 @@ public class LevelsDataModifier : ScriptableWizard
         }
         else
         {
-            Debug.Log("No assets found");
-            /* fileNames = new string[0];*/ // No files found if the directory doesn't exist.
+            Debug.Log("<color=red> No assets found </color>");
         }
     }
 
@@ -147,8 +154,7 @@ public class LevelsDataModifier : ScriptableWizard
         levelSettings.level.horizontalSpawnArea = horizontalSpawnArea;
     }
 
-    // Create a dropdown in the wizard for selecting the file.
-    void OnWizardOtherButton()
+    private void OnWizardOtherButton()
     {
         if (levelSettings != null)
         {

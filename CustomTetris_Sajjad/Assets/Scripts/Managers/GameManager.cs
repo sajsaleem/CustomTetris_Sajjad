@@ -20,13 +20,21 @@ public class GameManager : MonoBehaviour, IGameManager
         ResetDebugPanel();
     }
 
-    public void StartPlay(GameModeType _gameModeType)
+    public void StartLevelSequence(GameModeType _gameModeType)
     {
         ActiveGameMode = _gameModeType;
         Managers.LevelMaster.SetNewLevelSetting();
         Managers.CameraMaster.SetCamerasActiveStatus(ActiveGameMode);
         Managers.PlayersSpawner.SpawnPlayers(_gameModeType);
         Managers.MenuController.ActivateUi(MenuType.GameMenu);
+
+    }
+
+    public async void StartGameplay()
+    {
+        await Task.Delay(1000);
+        UpdateGameState(GameStates.PlayState);
+        //Managers.MenuController.ActivateUi(MenuType.GameMenu);
 
     }
 
@@ -44,8 +52,12 @@ public class GameManager : MonoBehaviour, IGameManager
 
         // Disable All players spawned;
         Managers.PlayersSpawner.Reset();
-
         Managers.ResultManager.Reset();
+        Managers.CameraMaster.Reset();
+        GameState = GameStates.StartState;
+
+        if (DebugPanelManager.Instance)
+            DebugPanelManager.Instance.Reset();
 
     }
 

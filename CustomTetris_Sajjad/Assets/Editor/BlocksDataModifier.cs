@@ -12,7 +12,6 @@ public class BlocksDataModifier : ScriptableWizard
     #region Exposed Variables
     [Tooltip("Updates the Scaling of surface in three-dimensions")]
     [SerializeField] private float normalFallSpeed = default;
-    [SerializeField] private float freefallSpeed = default;
     [SerializeField] private float rotationSpeed = default;
     [SerializeField] private float targetRotation = default;
     [SerializeField] private Vector3 gravity = Physics.gravity;
@@ -28,7 +27,6 @@ public class BlocksDataModifier : ScriptableWizard
     private BaseBlockSettings _blockSettings = null;
 
     private float originalnormalFallSpeed = default;
-    private float originalfreefallSpeed = default;
     private float originalrotationSpeed = default;
     private float originaltargetRotation = default;
     private Vector3 originalgravity = default;
@@ -79,8 +77,6 @@ public class BlocksDataModifier : ScriptableWizard
     {
         if (normalFallSpeed != originalnormalFallSpeed)
             return true;
-        if (freefallSpeed != originalfreefallSpeed)
-            return true;
         if (rotationSpeed != originalrotationSpeed)
             return true;
         if (targetRotation != originaltargetRotation)
@@ -125,7 +121,6 @@ public class BlocksDataModifier : ScriptableWizard
         if (_blockSettings != null)
         {
             originalnormalFallSpeed = _blockSettings.blockData.normalFallSpeed;
-            originalfreefallSpeed = _blockSettings.blockData.freefallSpeed;
             originaltargetRotation = _blockSettings.blockData.targetRotation;
             originalrotationSpeed = _blockSettings.blockData.rotationSpeed;
             originallocalScale = _blockSettings.blockData.localScale;
@@ -133,7 +128,6 @@ public class BlocksDataModifier : ScriptableWizard
             originalhorizontalMovementArea = _blockSettings.blockData.horizontalMovementArea;
 
             normalFallSpeed = originalnormalFallSpeed;
-            freefallSpeed = originalfreefallSpeed;
             targetRotation = originaltargetRotation;
             rotationSpeed = originalrotationSpeed;
             localScale = originallocalScale;
@@ -145,7 +139,6 @@ public class BlocksDataModifier : ScriptableWizard
     private void UpdateLevelValues()
     {
         _blockSettings.blockData.normalFallSpeed = normalFallSpeed;
-        _blockSettings.blockData.freefallSpeed = freefallSpeed;
         _blockSettings.blockData.rotationSpeed = rotationSpeed;
         _blockSettings.blockData.targetRotation = targetRotation;
         _blockSettings.blockData.localScale = localScale;

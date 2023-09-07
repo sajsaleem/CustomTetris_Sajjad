@@ -14,21 +14,21 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour, IBlockMovementHa
     #region private fields
     private Rigidbody _myRigidBody;
     private ConstantForce _constantForce;
+    private FixedJoint fixedJoint;
     private Transform placementHighlighter;
     private bool rotatePiece = default;
     private bool isAddedToTower = default;
+    private bool updateHighlighterPosition = default;
     private float targetRotation = default;
     private float rotationSpeed = default;
     private float fallSpeed = default;
     private float placedheight = default;
-    private float _gravity = default;
     private float xHighlighterScale = default;
     private IPlayerProgressTracker playerProgressTracker;
     #endregion
 
     #region properties
     public bool IsPlaced { get; private set; } = default;
-    public bool IsMoveable { get; private set; } = default;
     public bool MyRigidBody { get => _myRigidBody; }
     public bool IsActive { get => gameObject.activeInHierarchy;}
     public BlockState BlockState { get => _blockState; }
@@ -48,14 +48,14 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour, IBlockMovementHa
         _constantForce.force = blockSettings.blockData.gravity;
         _constantForce.enabled = false;
         IsPlaced = false;
-        IsMoveable = true;
         rotatePiece = false;
         UpdatePieceState(BlockState.Falling);
         placedheight = 0;
         playerProgressTracker = _playerProgressTracker;
         placementHighlighter = highlighter;
-        xHighlighterScale = CalculationsStaticClass.GetChildrenScale(rotationPivot);
+        xHighlighterScale = CalculationsStaticClass.GetHorizontalChilrenScale(rotationPivot);
         SetPlacementHighlighterXScale(xHighlighterScale);
+
     }
 
     public virtual void MyEnable()
@@ -67,7 +67,7 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour, IBlockMovementHa
 
     public virtual void RotatePiece()
     {
-        if (IsPlaced || !IsMoveable)
+        if (IsPlaced )//|| !IsMoveable)
             return;
 
         targetRotation = rotationPivot.rotation.eulerAngles.z + 90.0f;
@@ -82,10 +82,7 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour, IBlockMovementHa
 
     public virtual void MovePieceSideWays(float moveAmount)
     {
-        if (!IsMoveable)
-            return;
-
-        if (!IsMoveable)
+        if (IsPlaced)
             return;
 
 #if UNITY_ANDROID || UNITY_IOS
@@ -113,17 +110,8 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour, IBlockMovementHa
 
         UpdatePlacementHighlighterPosition(new Vector3(
             rotationPivot.position.x,
-            placementHighlighter.position.y,
+            CalculationsStaticClass.GetVerticalViewportToWorldPoint(1),
             placementHighlighter.position.z));
-
-        //placementHighlighter.position = new Vector3(rotationPivot.position.x, placementHighlighter.position.y, placementHighlighter.position.z);
-    }
-
-    public virtual void FreeFallPiece()
-    {
-        fallSpeed = blockSettings.CaclulateFreeFallSpeed();
-        IsMoveable = false;
-        UpdatePieceState(BlockState.FreeFall);
     }
 
     public virtual void Reset()
@@ -151,8 +139,17 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour, IBlockMovementHa
         if (Mathf.Approximately(rotateValue, targetRotation))
         {
             rotatePiece = false;
-            xHighlighterScale = CalculationsStaticClass.GetChildrenScale(rotationPivot);
+            updateHighlighterPosition = true;
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if(updateHighlighterPosition)
+        {
+            xHighlighterScale = CalculationsStaticClass.GetHorizontalChilrenScale(rotationPivot);
             SetPlacementHighlighterXScale(xHighlighterScale);
+            updateHighlighterPosition = false;
         }
     }
 
@@ -168,10 +165,16 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour, IBlockMovementHa
             AddToTowerHeight();
         }
 
-        if(_myRigidBody.velocity.magnitude <= 0.005f)
+        if(_myRigidBody.velocity.magnitude <= 0.1f)
         {
             UpdatePieceState(BlockState.InStableState);
         }
+
+        else if(_blockState == BlockState.IsPlaced || _blockState == BlockState.InStableState)
+        {
+            UpdatePieceState(BlockState.FallAfterPlace);
+        }
+
         else
         {
             UpdatePieceState(BlockState.Falling);
@@ -186,13 +189,12 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour, IBlockMovementHa
         if (collision.gameObject.CompareTag("surface") || (ipieceMovmentHandler != null && ipieceMovmentHandler.IsPlaced))
         {
             IsPlaced = true;
-            IsMoveable = false;
             _constantForce.enabled = true;
             UpdatePieceState(BlockState.IsPlaced);
         }
     }
 
-    private void UpdatePieceState(BlockState blockState)
+    public void UpdatePieceState(BlockState blockState)
     {
         if (_blockState != blockState)
             _blockState = blockState;
@@ -200,6 +202,7 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour, IBlockMovementHa
 
     private void SetPlacementHighlighterXScale(float value)
     {
+        value = Mathf.RoundToInt(value);
         placementHighlighter.localScale = new Vector3(value, placementHighlighter.localScale.y, placementHighlighter.localScale.z);
     }
 

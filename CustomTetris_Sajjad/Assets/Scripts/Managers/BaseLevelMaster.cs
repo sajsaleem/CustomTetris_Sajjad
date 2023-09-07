@@ -50,7 +50,7 @@ public abstract class BaseLevelMaster : MonoBehaviour,ILevelMaster
 
     public int WinCondition()
     {
-        return (int)_winCondition;
+        return activeLevelData.winCondition;//(int)_winCondition;
     }
 
     public int LossCondition()

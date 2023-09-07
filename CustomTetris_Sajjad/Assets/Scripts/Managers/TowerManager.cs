@@ -31,19 +31,21 @@ public class TowerManager : MonoBehaviour, ITowerManager
         //Update UI end;
         float maxheight = 0;
         float placedheight = 0;
+        float height = 0;
+        float surfaceHeight = Managers.LevelMaster.SurfaceHeight();
 
-        for(int i = 0; i < towerBlocks.Count; i++)
+        for (int i = 0; i < towerBlocks.Count; i++)
         {
-            Transform heighestChild = CalculationsStaticClass.GetHeighestTransformInChildren(towerBlocks[i]);
-            placedheight = CalculationsStaticClass.GetObjectHeight(heighestChild);
+            height = CalculationsStaticClass.GetVerticalChildrenScale(towerBlocks[i]);
+            placedheight = CalculationsStaticClass.GetMaxHeightOfObject(height, towerBlocks[i].position.y - surfaceHeight);
+
+            Debug.LogFormat("<color=green> maxHeight: {0} , TowerHeight: {1}", maxheight, TowerHeight);
 
             if (placedheight > maxheight)
                 maxheight = placedheight;
         }
 
         TowerHeight = Mathf.Ceil(maxheight);
-
-        Debug.Log("<color=green> Tower Height: </color>" + TowerHeight);
     }
 
     public void Reset()

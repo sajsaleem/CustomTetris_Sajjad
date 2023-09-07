@@ -10,7 +10,7 @@ public class MenuManager : MonoBehaviour
 
     public void OnStartCallBack()
     {
-        Managers.GameManager.StartPlay(GameModeType.TwoPlayer);
+        Managers.GameManager.StartLevelSequence(GameModeType.TwoPlayer);
         miniMapCamera.gameObject.SetActive(true);
         miniMap.gameObject.SetActive(true);
         startButton.SetActive(false);

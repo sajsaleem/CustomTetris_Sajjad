@@ -4,8 +4,7 @@ using UnityEngine;
 
 public abstract class BaseBlockSettings : ScriptableObject
 {
-    public blockData blockData;
+    public BlockData blockData;
 
     public abstract float CalculateNormalFallSpeed();
-    public abstract float CaclulateFreeFallSpeed();
 }

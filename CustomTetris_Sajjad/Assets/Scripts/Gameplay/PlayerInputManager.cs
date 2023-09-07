@@ -119,12 +119,6 @@ public class PlayerInputManager : MonoBehaviour ,IPlayerInputManager
         {
             RotateObject();
         }
-
-        //swipe down
-        //else if ( (Time.time - touchPhaseStart < (tapInterval + 1f)) && swipeDirection.y > -0.5f && swipeDirection.x > -0.5f && swipeDirection.x < 0.5f)
-        //{
-        //    Managers.PiecesObjectPooler.ActivePiece.FreeFallPiece();
-        //}
     }
 
     private bool IsSwipeOnYAxis(Vector3 swipeDirection)

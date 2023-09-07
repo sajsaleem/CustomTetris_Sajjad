@@ -50,11 +50,6 @@ public class NormalBlockMovementHandler : BaseBlockMovementHandler
         base.RotatePiece();
     }
 
-    public override void FreeFallPiece()
-    {
-        base.FreeFallPiece();
-    }
-
     public override void MyUpdate()
     {
         base.MyUpdate();

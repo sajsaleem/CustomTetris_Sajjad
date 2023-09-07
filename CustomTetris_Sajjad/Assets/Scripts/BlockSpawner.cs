@@ -87,7 +87,7 @@ public class BlockSpawner : MonoBehaviour,IBlockSpawner
         while (Managers.GameManager.GameState == GameStates.PlayState)
         {
             SpawnPiece();
-            yield return new WaitUntil(() => NewBlock.IsPlaced);
+            yield return new WaitUntil(() => NewBlock.IsPlaced || NewBlock.BlockState == BlockState.FellOutOfBounds);
             SetPlacementHiglighterActiveStatus(false);
 
         }

@@ -6,7 +6,8 @@ public interface IGameManager
 {
     GameStates GameState { get; }
     GameModeType ActiveGameMode { get; }
-    void StartPlay(GameModeType _gameModeType);
+    void StartLevelSequence(GameModeType _gameModeType);
+    void StartGameplay();
     void EndPlay();
     void ResetAll();
     void UpdateGameState(GameStates _gamestate);

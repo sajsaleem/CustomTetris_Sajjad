@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class blockData
+public class BlockData
 {
     public float normalFallSpeed = default;
-    public float freefallSpeed = default;
     public float rotationSpeed = default;
     public float targetRotation = default;
     public Vector2 horizontalMovementArea; // 0 => left of camera , 1 => right of camera;

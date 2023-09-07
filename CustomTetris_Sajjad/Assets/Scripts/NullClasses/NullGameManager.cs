@@ -21,7 +21,12 @@ public class NullGameManager : IGameManager
     public GameModeType ActiveGameMode { get; private set; } = default;
 
 
-    public void StartPlay(GameModeType _gameModeType)
+    public void StartLevelSequence(GameModeType _gameModeType)
+    {
+
+    }
+
+    public void StartGameplay()
     {
 
     }

@@ -12,13 +12,13 @@ public class StartMenu : BaseMenu
 
     public void OnSinglePlayerStartCallBack()
     {
-        Managers.GameManager.StartPlay(GameModeType.SinglePlayer);
+        Managers.GameManager.StartLevelSequence(GameModeType.SinglePlayer);
         Managers.MenuController.DisableUi(MenuType);
     }
 
     public void OnTwoPlayerStartCallBack()
     {
-        Managers.GameManager.StartPlay(GameModeType.TwoPlayer);
+        Managers.GameManager.StartLevelSequence(GameModeType.TwoPlayer);
         Managers.MenuController.DisableUi(MenuType);
     }
 

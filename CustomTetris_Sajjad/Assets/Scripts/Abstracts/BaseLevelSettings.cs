@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public abstract class BaseLevelSettings : ScriptableObject
 {
     public LevelData level;
 }
 
-
+#if UNITY_EDITOR
 [CustomEditor(typeof(LevelSettings))]
-public class YourScriptableObjectEditor : Editor
+public class BaseLevelSettingsEditor : Editor
 {
     public override void OnInspectorGUI()
     {
@@ -28,3 +30,4 @@ public class YourScriptableObjectEditor : Editor
 
     }
 }
+#endif

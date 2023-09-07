@@ -5,16 +5,22 @@ using System.Threading.Tasks;
 
 public class BlockSpawner : MonoBehaviour,IBlockSpawner
 {
+    #region SerializedFields
     [SerializeField] private Transform placementHighlighter;
     [SerializeField] private UnityLayers unityLayer;
+    #endregion
+
+    #region Private Variables
 
     private float leftPositionX , rightPositionX;
     private float spawnHeight = default;
-    private Vector3 worldPosition;
     private IPlayerProgressTracker playerProgressTracker;
+    #endregion
+
+    #region Properties
 
     public BaseBlockMovementHandler NewBlock { get; private set; } = default;
-
+    #endregion
 
     private void OnEnable()
     {
@@ -80,6 +86,8 @@ public class BlockSpawner : MonoBehaviour,IBlockSpawner
         placementHighlighter.gameObject.SetActive(value);
     }
 
+    #region Coroutines
+
     private IEnumerator _Spawner()
     {
         yield return new WaitUntil(() => Managers.GameManager.GameState == GameStates.PlayState);
@@ -94,5 +102,6 @@ public class BlockSpawner : MonoBehaviour,IBlockSpawner
 
         yield break;
     }
+    #endregion
 
 }

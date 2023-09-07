@@ -13,7 +13,6 @@ public class BotInputManager : MonoBehaviour, IPlayerInputManager
 
     private void OnEnable()
     {
-        
         BlockSpawner = GetComponent<IBlockSpawner>();
         StartCoroutine("WaitForGameplayStart");
     }

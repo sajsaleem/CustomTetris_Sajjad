@@ -20,7 +20,6 @@ public class PlayerInputManager : MonoBehaviour ,IPlayerInputManager
     private void Start()
     {
         BlockSpawner = GetComponent<IBlockSpawner>();
-        //Vector3 pos = Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0.3f, 0.6f), 0.8f, 0));
     }
 
     void Update()
@@ -119,16 +118,6 @@ public class PlayerInputManager : MonoBehaviour ,IPlayerInputManager
         {
             RotateObject();
         }
-    }
-
-    private bool IsSwipeOnYAxis(Vector3 swipeDirection)
-    {
-        if(swipeDirection.y < -0.5f && swipeDirection.x > -0.2f && swipeDirection.x < 0.2f)
-        {
-            return true;
-        }
-
-        return false;
     }
 
     private void MoveObject(float moveAmount)

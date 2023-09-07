@@ -5,17 +5,23 @@ using UnityEngine;
 
 public abstract class BaseLevelMaster : MonoBehaviour,ILevelMaster
 {
+    #region Serialized Variables
     [SerializeField] private List<BaseLevelSettings> _levelSettingsList = new List<BaseLevelSettings>();
     [SerializeField] private bool _shouldGenerateUniqueLevels;
     [SerializeField] private bool _shouldGenerateRandomLevels;
+    #endregion
 
+    #region Private Variables
     private LevelData activeLevelData;
     private float _winCondition = default;
+    #endregion
 
+    #region Properties
     public List<BaseLevelSettings> LevelSettingsList { get => _levelSettingsList; }
     public List<BaseLevelSettings> UsedLevelsList { get; private set; } = new List<BaseLevelSettings>();
     public bool ShouldGenerateUniqueLevel { get => _shouldGenerateUniqueLevels; }
     public bool ShouldGenerateRandomLevel { get => _shouldGenerateRandomLevels; }
+    #endregion
 
     public virtual void SetNewLevelSetting()
     {
@@ -50,7 +56,7 @@ public abstract class BaseLevelMaster : MonoBehaviour,ILevelMaster
 
     public int WinCondition()
     {
-        return activeLevelData.winCondition;//(int)_winCondition;
+        return activeLevelData.winCondition;
     }
 
     public int LossCondition()
@@ -68,5 +74,4 @@ public abstract class BaseLevelMaster : MonoBehaviour,ILevelMaster
         if (_winCondition <= 0)
             _winCondition = value;
     }
-
 }

@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class PlayerProgressTracker : MonoBehaviour,IPlayerProgressTracker
 {
+    #region Properties
     public ITowerManager TowerManager { get; private set; } = default;
     public int PiecesLost { get; private set; } = default;
+    #endregion
 
-
+    #region Private Variables
     private int winCondition = default;
     private int lossCondition = default;
     private IPlayerType playerType;
+    #endregion
 
     private void Start()
     {

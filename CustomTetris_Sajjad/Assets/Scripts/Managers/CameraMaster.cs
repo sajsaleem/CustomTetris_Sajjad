@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* Responsible for managing singleplayer or two player cameras */
+
 public class CameraMaster : MonoBehaviour,ICameraMaster
 {
     [SerializeField] private GameObject cameraForPlayer1;

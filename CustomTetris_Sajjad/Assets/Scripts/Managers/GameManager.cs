@@ -34,8 +34,6 @@ public class GameManager : MonoBehaviour, IGameManager
     {
         await Task.Delay(1000);
         UpdateGameState(GameStates.PlayState);
-        //Managers.MenuController.ActivateUi(MenuType.GameMenu);
-
     }
 
     public void EndPlay()
@@ -64,13 +62,6 @@ public class GameManager : MonoBehaviour, IGameManager
     public void UpdateGameState(GameStates _gamestate)
     {
         GameState = _gamestate;
-    }
-
-
-    private async void SetGamePlayState()
-    {
-        await Task.Delay(1000);
-        //GameState = GameStates.PlayState;
     }
 
     private void ResetDebugPanel()

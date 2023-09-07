@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Responsible for handling tower height and other tower related activities;
+
 public class TowerManager : MonoBehaviour, ITowerManager
 {
 

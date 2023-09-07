@@ -23,7 +23,6 @@ public class PlayerEnvironmentSetter : MonoBehaviour
         // Calculates finishline position by using wincondition value and by using dimensions of surface;
         float finishLineYPos = CalculationsStaticClass.GetVerticalDistance(_levelData.winCondition, surface.position.y, surface.localScale.y);
         finishLine.position = new Vector3(finishLine.position.x, finishLineYPos, finishLine.position.z);
-        //Managers.LevelMaster.UpdateWinCondition(finishLine.position.y);
         Managers.CameraMaster.ShowFinishLine(finishLine.position.y);
     }
 }

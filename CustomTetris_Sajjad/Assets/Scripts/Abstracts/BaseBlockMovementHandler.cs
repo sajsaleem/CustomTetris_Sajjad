@@ -143,18 +143,15 @@ public abstract class BaseBlockMovementHandler : MonoBehaviour, IBlockMovementHa
         }
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
-        if(updateHighlighterPosition)
+        if (updateHighlighterPosition)
         {
             xHighlighterScale = CalculationsStaticClass.GetHorizontalChilrenScale(rotationPivot);
             SetPlacementHighlighterXScale(xHighlighterScale);
             updateHighlighterPosition = false;
         }
-    }
 
-    private void FixedUpdate()
-    {
         if (!IsPlaced)
         {
             _myRigidBody.velocity = new Vector3(0, fallSpeed, 0);

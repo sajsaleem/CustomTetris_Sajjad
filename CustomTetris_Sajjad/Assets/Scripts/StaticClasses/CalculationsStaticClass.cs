@@ -89,8 +89,6 @@ public static class CalculationsStaticClass
             }
         }
 
-        Debug.Log("Height: " + (maxY - minY));
-
         return maxY - minY;
     }
 }

@@ -14,6 +14,8 @@ public class CameraController : MonoBehaviour,ICameraController
     private float moveUpAmount = default;
     private float moveDownAmount = default;
     private float waitBeforeMoveToInitial = default;
+    private float lerpY = default;
+    private float lerpMove = default;
 
     private Vector3 initialPosition;
 
@@ -73,7 +75,7 @@ public class CameraController : MonoBehaviour,ICameraController
     {
         if (moveUp)
         {
-            float lerpY = Mathf.MoveTowards(transform.position.y, moveUpAmount, cameraFollowSpeed * Time.deltaTime);
+            lerpY = Mathf.MoveTowards(transform.position.y, moveUpAmount, cameraFollowSpeed * Time.deltaTime);
             transform.position = new Vector3(transform.position.x, lerpY, transform.position.z);
 
             if (Mathf.Approximately(lerpY, moveUpAmount))
@@ -82,7 +84,7 @@ public class CameraController : MonoBehaviour,ICameraController
 
         if (moveDown)
         {
-            float lerpY = Mathf.MoveTowards(transform.position.y, moveDownAmount, cameraFollowSpeed * Time.deltaTime);
+            lerpY = Mathf.MoveTowards(transform.position.y, moveDownAmount, cameraFollowSpeed * Time.deltaTime);
             transform.position = new Vector3(transform.position.x, lerpY, transform.position.z);
 
             if (Mathf.Approximately(lerpY, moveDownAmount))
@@ -105,11 +107,11 @@ public class CameraController : MonoBehaviour,ICameraController
 
     private void MovingToTarget(float moveAmount)
     {
-        float lerpMov = Mathf.MoveTowards(transform.position.y, moveAmount, startSequenceSpeed * Time.deltaTime);
+        lerpMove = Mathf.MoveTowards(transform.position.y, moveAmount, startSequenceSpeed * Time.deltaTime);
 
-        transform.position = new Vector3(transform.position.x, lerpMov, transform.position.z);
+        transform.position = new Vector3(transform.position.x, lerpMove, transform.position.z);
 
-        if (Mathf.Approximately(lerpMov, moveAmount)) 
+        if (Mathf.Approximately(lerpMove, moveAmount)) 
         {
             isMovingToFinishLine = false;
             isMovingToInitialPos = true;
@@ -119,11 +121,11 @@ public class CameraController : MonoBehaviour,ICameraController
 
     private void MovingToInitialPosition(float moveAmount)
     {
-        float lerpMov = Mathf.MoveTowards(transform.position.y, moveAmount, startSequenceSpeed * Time.deltaTime);
+        lerpMove = Mathf.MoveTowards(transform.position.y, moveAmount, startSequenceSpeed * Time.deltaTime);
 
-        transform.position = new Vector3(transform.position.x, lerpMov, transform.position.z);
+        transform.position = new Vector3(transform.position.x, lerpMove, transform.position.z);
 
-        if (Mathf.Approximately(lerpMov, moveAmount))
+        if (Mathf.Approximately(lerpMove, moveAmount))
         {
             isMovingToInitialPos = false;
             Managers.GameManager.StartGameplay();

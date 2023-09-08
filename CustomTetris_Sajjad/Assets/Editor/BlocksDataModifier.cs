@@ -10,12 +10,22 @@ public class BlocksDataModifier : ScriptableWizard
     public string ScriptableAsset;
 
     #region Exposed Variables
-    [Tooltip("Updates the Scaling of surface in three-dimensions")]
+    [Tooltip("Update fall speed multiplier to gravity value")]
     [SerializeField] private float normalFallSpeed = default;
+
+    [Tooltip("Updates rotation speed for each falling block")]
     [SerializeField] private float rotationSpeed = default;
+
+    [Tooltip("Updates rotation to target value when screen is tapped")]
     [SerializeField] private float targetRotation = default;
+
+    [Tooltip("Updates gravity value for each block")]
     [SerializeField] private Vector3 gravity = Physics.gravity;
+
+    [Tooltip("Updates localScale for each block")]
     [SerializeField] private Vector3 localScale = Vector3.one;
+
+    [Tooltip("Defines allowed movement area for each block horizontally")]
     [SerializeField] private Vector2 horizontalMovementArea = default;
     #endregion
 

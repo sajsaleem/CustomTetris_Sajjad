@@ -41,8 +41,6 @@ public class TowerManager : MonoBehaviour, ITowerManager
             height = CalculationsStaticClass.GetVerticalChildrenScale(towerBlocks[i]);
             placedheight = CalculationsStaticClass.GetMaxHeightOfObject(height, towerBlocks[i].position.y - surfaceHeight);
 
-            Debug.LogFormat("<color=green> maxHeight: {0} , TowerHeight: {1}", maxheight, TowerHeight);
-
             if (placedheight > maxheight)
                 maxheight = placedheight;
         }
